@@ -11,7 +11,7 @@ def putmethode_(url):
     data="<TFwKlsH7pVbfJ>"
     filename='poc.html'
     headers = {'User-Agent': user_agent } 
-    url=url+filename
+    url=url+'/'+filename
 
 
     try:
