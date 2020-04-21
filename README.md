@@ -20,6 +20,10 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 ## Usage
 **Install:**
 
+`git clone https://github.com/raoufmaklouf/Thorin.git`
+
+`cd Thorin`
+
 `pip3 install -r requirements.txt
 `
 
