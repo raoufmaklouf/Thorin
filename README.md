@@ -36,3 +36,9 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 `
 
 ![Alt text](https://raw.githubusercontent.com/raoufmaklouf/Thorin/master/pictures/Screenshot%20at%202020-04-20%2014-50-45.jpg?raw=true "Title")
+
+
+# **Author** #
+*raouf maklouf*
+* Facebook: [https://www.facebook.com/raouf.maklouf]
+* Linkedin: [https://www.linkedin.com/in/raouf-maklouf-505a061a0/]
