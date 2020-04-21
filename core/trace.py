@@ -11,9 +11,6 @@ def trace_(url):
    
     for a,b in regex.REGEX_URL.items():
         mutch=re.search(b, url)
-        #for i in mutch:
-            #print(i)
-        
         if(mutch): 
             mutch_=mutch.group()
             
@@ -36,8 +33,6 @@ def trace_(url):
                 pass
         else:
             pass
-if __name__=="__main__":
-     trace_("http://belbana.com/scripts/swfobject.sql")
-           
+
             
             
