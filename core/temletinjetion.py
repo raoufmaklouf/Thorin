@@ -11,7 +11,7 @@ test1="58784"
 test2='32110'
 
 def ssti_(url):
-    vul=[]
+   
     try:
         for x in regex.payload_ssti_1:
             r = requests.get(nano.inject_param(url,x),verify=False)
