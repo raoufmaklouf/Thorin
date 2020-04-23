@@ -65,8 +65,8 @@ def semple(url):
 
 def sqlinjection_(url):
     
-    semple(nano.inject_param(url,"'"))
-    semple(nano.inject_param(url,'"'))
+    semple(nano.inject_param(url,"x'"))
+    semple(nano.inject_param(url,'x"'))
     error_base(url)
     blind_base(url)
         
