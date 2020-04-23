@@ -10,7 +10,9 @@ from core import nano
 def jsparse_(url):
     if nano.rev(url).split('.')[0] == nano.rev('js'):
         try:
-            r = requests.get(url)
+            user_agent=random.choice(regex.USR_AGENTS)
+            headers = {'User-Agent': user_agent } 
+            r = requests.get(url,headers=headers)
             resp = r.content
             if len(resp)>0:
                 for a,b in regex.REGEX_JS.items():
