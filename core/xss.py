@@ -17,7 +17,7 @@ def xss_(link):
                 resp = r.content
                 x = re.findall(rg, str(resp))
                 if (x):
-                    print('\033[91m Possibly XSS vulnerability\033[00m  '+url)
+                    print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                     break
                 else: 
                     pass
@@ -33,7 +33,7 @@ def xss_(link):
                 resp = r.content
                 x = re.findall(rg, str(resp))
                 if (x):
-                    print('\033[91m Possibly XSS vulnerability\033[00m  '+url)
+                    print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                 else:
                     pass
             except:
@@ -58,7 +58,7 @@ def xss_dir(link):
                 resp = r.content
                 x = re.findall(rg, str(resp))
                 if (x):
-                    print('\033[91m Possibly XSS vulnerability\033[00m  '+url)
+                    print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                 else:
                     pass
     except:
