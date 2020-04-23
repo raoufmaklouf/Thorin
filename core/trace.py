@@ -16,7 +16,9 @@ def trace_(url):
             
             
             try:
-                resp = requests.get(url)
+                user_agent=random.choice(regex.USR_AGENTS)
+                headers = {'User-Agent': user_agent }
+                resp = requests.get(url,headers=headers)
                 scode=resp.status_code
                 if '2' in str(scode) :
                     r="\033[32m[{}]\033[00m".format(str(scode))
