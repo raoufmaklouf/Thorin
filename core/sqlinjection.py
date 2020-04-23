@@ -8,7 +8,9 @@ from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def response_time(url):
-    r = requests.get(url)   
+    user_agent=random.choice(regex.USR_AGENTS)
+    headers = {'User-Agent': user_agent } 
+    r = requests.get(url,headers=headers)   
     r_time = int(r.elapsed.total_seconds())
     return r_time
 
