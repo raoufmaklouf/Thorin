@@ -1,4 +1,5 @@
 import requests
+import re
 
 def inject_dir(link,pay):
     if link[-1] =="/":
