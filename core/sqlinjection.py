@@ -44,13 +44,13 @@ def error_base(url):
         if len(god_r) != len(bad_r):
             state=True
             if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
-                print("\033[91mPossibly SQL injection error base vulnerability\033[00m  ")
-                print(inject(url,god)+'\n'+url+bad)
+                print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
                 break
             else:
                 print('\033[33;1mWarning can be false positives\033[00m')
-                print("\033[91mPossibly SQL injection error base vulnerability\033[00m  ")
-                print(inject(url,god)+' Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' Response lenth:'+str(len(bad_r)))
+                print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
                 break
     return state
 
@@ -67,8 +67,8 @@ def blind_base(url):
         rs3=response_time(r3)
         if int(rs1) < int(rs2) and int(rs2) < int(rs3):
             state=True
-            print("\033[91mPossibly blind SQL injection  vulnerability\033[00m  ")
-            print(r1+' Response time:'+str(rs1)+'\n'+r2+' Response time:'+str(rs2)+'\n'+r3+' Response time:'+str(rs3))
+            print("\033[91mPossibly SQL injection  vulnerability\033[00m  ")
+            print(r1+' | Response time:'+str(rs1)+'\n'+r2+' | Response time:'+str(rs2)+'\n'+r3+' | Response time:'+str(rs3))
             break
     return state
   
