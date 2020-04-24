@@ -11,14 +11,11 @@ def trace_(url):
    
     for a,b in regex.REGEX_URL.items():
         mutch=re.search(b, url)
-        if(mutch): 
+        if(mutch):
             mutch_=mutch.group()
             
-            
             try:
-                user_agent=random.choice(regex.USR_AGENTS)
-                headers = {'User-Agent': user_agent }
-                resp = requests.get(url,headers=headers)
+                resp = requests.get(url)
                 scode=resp.status_code
                 if '2' in str(scode) :
                     r="\033[32m[{}]\033[00m".format(str(scode))
