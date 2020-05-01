@@ -8,7 +8,7 @@ from core import nano
 
 
 def jsparse_(url):
-    if nano.rev(url).split('.')[0] == nano.rev('js'):
+    if nano.rev(url).split('.')[0] == nano.rev('js') or ".js?ver=" in url:
         try:
             user_agent=random.choice(regex.USR_AGENTS)
             headers = {'User-Agent': user_agent } 
@@ -16,10 +16,11 @@ def jsparse_(url):
             resp = r.content
             if len(resp)>0:
                 for a,b in regex.REGEX_JS.items():
-                    mutch=re.search(b, str(resp))
+                    mutch=re.findall(b, str(resp))
                     if(mutch):                 
-                        mutch=mutch.group()
+                        
                         print("\033[94m[+] js file {} Contain: \033[00m".format(url))
-                        print("\033[33m[{}]-----|\033[00m  {}".format(a.rstrip(),mutch.rstrip()))
+                        for i in mutch:
+                            print("\033[33m[{}]-----|\033[00m  {}".format(a.rstrip(),i))
         except:
             pass           
