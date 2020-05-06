@@ -42,20 +42,23 @@ def response_time(url):
 def error_base(url):
     state=False
     try:
-        for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
-            god_r=requests.get(inject(url,god)).text
-            bad_r=requests.get(inject(url,bad)).text
-            if len(god_r) != len(bad_r):
-                state=True
-                if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
-                    break
-                else:
-                    print('\033[33;1mWarning can be false positives\033[00m')
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
-                    break
+        r1=requests.get(inject(url,'test')).text
+        r2=requests.get(inject(url,'test')).text
+        if len(r1)==len(r2):
+            for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
+                god_r=requests.get(inject(url,god)).text
+                bad_r=requests.get(inject(url,bad)).text
+                if len(god_r) != len(bad_r):
+                    state=True
+                    if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
+                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                        print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
+                        break
+                    else:
+                        print('\033[33;1mWarning can be false positives\033[00m')
+                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                        print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
+                        break
     except:
         pass
     return state
@@ -87,6 +90,7 @@ def semple(url):
     headers = {'User-Agent': user_agent } 
 
     try:
+        
         r = requests.get(url,headers=headers,verify=False)
         cont = r.content
         for x in regex.SQL_ERROR:
