@@ -26,7 +26,7 @@ def run(word_queue,url):
     url=str(url)
     for x in regex.parameters_OR:
             param=(x+"=")
-            if param url:
+            if param in url:
                 try:
                     base_link=url.split(param)[0]
                 except:
