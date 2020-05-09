@@ -108,10 +108,11 @@ def semple(url):
                 
 
 def sqlinjection_(url):
-    task1=semple(nano.inject_param(url,"x'"))
-    if task1 == False:
-        task2=semple(nano.inject_param(url,'x"'))
-        if task2 == False:
-            task3=error_base(url)
-            if task3 == False:
-                blind_base(url)
+    if url != None:
+        task1=semple(nano.inject_param(url,"x'"))
+        if task1 == False:
+            task2=semple(nano.inject_param(url,'x"'))
+            if task2 == False:
+                task3=error_base(url)
+                if task3 == False:
+                    blind_base(url)
