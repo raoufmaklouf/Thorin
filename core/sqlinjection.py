@@ -42,20 +42,23 @@ def response_time(url):
 def error_base(url):
     state=False
     try:
-        for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
-            god_r=requests.get(inject(url,god)).text
-            bad_r=requests.get(inject(url,bad)).text
-            if len(god_r) != len(bad_r):
-                state=True
-                if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
-                    break
-                else:
-                    print('\033[33;1mWarning can be false positives\033[00m')
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(inject(url,god)+' | Response lenth:'+str(len(god_r))+'\n'+inject(url,bad)+' | Response lenth:'+str(len(bad_r)))
-                    break
+        r1=requests.get(inject(url,'test'))
+        r2=requests.get(inject(url,'test'))
+        if r1.headers.get('Content-Length')==r2.headers.get('Content-Length'):
+            for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
+                god_r=requests.get(inject(url,god))
+                bad_r=requests.get(inject(url,bad))
+                if bad_r.headers.get('Content-Length') != god_r.headers.get('Content-Length'):
+                    state=True
+                    if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
+                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                        print(inject(url,god)+' | Content-Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | Content-Length:'+str(len(bad_r)))
+                        break
+                    else:
+                        print('\033[33;1mWarning can be false positives\033[00m')
+                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                        print(inject(url,god)+' | Response lenth: '+str(god_r.headers.get('Content-Length'))+'\n'+inject(url,bad)+' | Response lenth: '+str(bad_r.headers.get('Content-Length')))
+                        break
     except:
         pass
     return state
@@ -85,19 +88,18 @@ def semple(url):
     state=False
     user_agent=random.choice(regex.USR_AGENTS)
     headers = {'User-Agent': user_agent } 
-    payload=["'",'"',";","#","-","--","--+"]
-    for x in payload:
-        try:
-            url=nano.inject_param(url,"x"+x)
-            r = requests.get(url,headers=headers,verify=False)
-            cont = r.content
-            for x in regex.SQL_ERROR:
-                if(re.search(x, str(cont))):
-                    state=True
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
-                    break
-        except:
-            pass
+
+    try:
+        
+        r = requests.get(url,headers=headers,verify=False)
+        cont = r.content
+        for x in regex.SQL_ERROR:
+            if(re.search(x, str(cont))):
+                state=True
+                print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
+                break
+    except:
+        pass
     
     
             
@@ -106,10 +108,10 @@ def semple(url):
                 
 
 def sqlinjection_(url):
-    task1=semple(url)
+    task1=semple(nano.inject_param(url,"x'"))
     if task1 == False:
-        task2=error_base(url)
+        task2=semple(nano.inject_param(url,'x"'))
         if task2 == False:
-            blind_base(url)
-            
-                
+            task3=error_base(url)
+            if task3 == False:
+                blind_base(url)
