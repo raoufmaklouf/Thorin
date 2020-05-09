@@ -23,9 +23,10 @@ def build_wordlist():
     return words
 
 def run(word_queue,url):
+    url=str(url)
     for x in regex.parameters_OR:
             param=(x+"=")
-            if param in url:
+            if param url:
                 try:
                     base_link=url.split(param)[0]
                 except:
@@ -99,5 +100,4 @@ def redirect_dir(url):
         t = threading.Thread(target=run_dir,args=(word_queue_dir,url))
         t.start()
        
-
 
