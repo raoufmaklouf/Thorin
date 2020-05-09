@@ -22,7 +22,7 @@ def build_wordlist():
 word_queue = build_wordlist()
 
 def run_(word_queue,url):
-    if "?" in url:
+    if url != None :
         while not word_queue.empty():
             attempt = word_queue.get()
             attempt_list = []
