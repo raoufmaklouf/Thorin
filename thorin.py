@@ -119,7 +119,7 @@ with alive_bar(len(urls)) as bar:
 
 with alive_bar(len(uniq)) as bar:
     for i in uniq:
-        sleep(2)
+        sleep(1.2)
         i=i.rstrip()
         bar()
         p5 = Process(target=corsF, args=(i,))
