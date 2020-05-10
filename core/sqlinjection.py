@@ -79,36 +79,35 @@ def blind_base(url):
         pass
     return state
   
-
 def semple(url):
     state=False
+    done=0
     user_agent=random.choice(regex.USR_AGENTS)
     headers = {'User-Agent': user_agent } 
-
-    try:
-        
-        r = requests.get(url,headers=headers,verify=False)
-        cont = r.content
-        for x in regex.SQL_ERROR:
-            if(re.search(x, str(cont))):
-                state=True
-                print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
-                break
-    except:
-        pass
+    payload=["'",'"',";","#","-","--","--+"]
     
-    
-            
+    for x in payload: 
+        if done ==1 :
+            break
+        try:
+            url=nano.inject_param(url,"x"+x)
+            r = requests.get(url,headers=headers,verify=False)
+            cont = r.content
+            for x in regex.SQL_ERROR:
+                if(re.search(x, str(cont))):
+                    state=True
+                    print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
+                    done=1
+                    break
+        except:
+            pass
+               
     return state
                 
                 
-
 def sqlinjection_(url):
-    if url != None:
-        task1=semple(nano.inject_param(url,"x'"))
-        if task1 == False:
-            task2=semple(nano.inject_param(url,'x"'))
-            if task2 == False:
-                task3=error_base(url)
-                if task3 == False:
-                    blind_base(url)
+    task1=semple(url)
+    if task1 == False:
+        task2=error_base(url)
+        if task2 == False:
+            blind_base(url)
