@@ -50,15 +50,11 @@ def error_base(url):
                 bad_r=requests.get(inject(url,bad)).text
                 if len(god_r) != len(bad_r):
                     state=True
-                    if nano.reflection(nano.inject_param(url,'SRtbT5lOuEg')) != True:
-                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                        print(inject(url,god)+' | Content-Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | Content-Length:'+str(len(bad_r)))
-                        break
-                    else:
-                        print('\033[33;1mWarning can be false positives\033[00m')
-                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                        print(inject(url,god)+' | Response lenth: '+str(god_r.headers.get('Content-Length'))+'\n'+inject(url,bad)+' | Response lenth: '+str(bad_r.headers.get('Content-Length')))
-                        break
+                    print('\033[33;1mWarning can be false positives\033[00m') 
+                    print("'\033[33;1Possibly SQL injection vulnerability\033[00m  ")
+                    print(inject(url,god)+' | Content-Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | Content-Length:'+str(len(bad_r)))
+                    break
+                    
     except:
         pass
     return state
