@@ -5,6 +5,7 @@ from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def cors_(url):
+    url=url.replace('uNiq_stRiNg','')
     user_agent=random.choice(regex.USR_AGENTS)
     headers={"Origin":"https://etdbeuajsyeu.com" ,'User-Agent':user_agent }
     try:
