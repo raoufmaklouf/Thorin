@@ -52,7 +52,7 @@ def error_base(url):
                     state=True
                     print('\033[33;1mWarning can be false positives\033[00m') 
                     print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(inject(url,god)+' | Content-Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | Content-Length:'+str(len(bad_r)))
+                    print(inject(url,god)+' | response Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | response Length:'+str(len(bad_r)))
                     break
                     
     except:
