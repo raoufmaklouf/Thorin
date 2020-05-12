@@ -43,8 +43,10 @@ def error_base(url):
     state=False
     try:
         r1=requests.get(inject(url,'test')).text
+        sr1=r1.status_code
         r2=requests.get(inject(url,'test')).text
-        if len(r1)==len(r2):
+        sr2=r1.status_code
+        if len(r1)==len(r2) and sr1 == sr2:
             for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
                 god_r=requests.get(inject(url,god)).text
                 bad_r=requests.get(inject(url,bad)).text
