@@ -192,7 +192,7 @@ parameters_OR=[
 'validate','domain','callback','return','page','view','dir','show','file','document','folder','root',
 'path','pg','style','pdf','template','php_path','doc','feed','host','port','to','out','navigation','open','result'
 ] 
-XSS={'<TrSAF45>':'%3CTrSAF45%3E','<TrSAF45':'%3CTrSAF45','TrSAF45<':'TrSAF45%3C','<TrSAAF45':'<TrSAAF45',
+XSS={'a<T"rSAF45>':'a%3CT%22rSAF45%3E','a<T"rSAF45':'a%3CT%22rSAF45','TrSAF45<':'TrSAF45%3C','<TrSAAF45':'<TrSAAF45',
 'TrSAAFF45<':'TrSAAFF45<','TrSAAF45<':'TrSAAF45%3C','TrSAAF45>':'TrSAAF45>','TrSA<F45':'TrSA%3CF45','TrSA>F45':'TrSA%3EF45',
 'TrSA<AF45':'TrSA<AF45','TrSA>AF45':'TrSA>AF45'}
 payload_ssti_1=["%7B%7B88*668%7D%7D","{{88*668}}","%3C%25%3D%2088%20%2a%20668%20%25%3E","<%=88*668%>",
