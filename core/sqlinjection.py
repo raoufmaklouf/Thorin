@@ -68,9 +68,9 @@ def blind_base(url):
         for x in regex.SQL_INJECTION_BLIND_BASE:
             r1=inject(url,str(x).format('0'))
             rs1=response_time(r1)
-            r2=inject(url,str(x).format('1'))
+            r2=inject(url,str(x).format('2'))
             rs2=response_time(r2)
-            r3=inject(url,str(x).format('3'))
+            r3=inject(url,str(x).format('4'))
             rs3=response_time(r3)
             if int(rs1) < int(rs2) and int(rs2) < int(rs3) and int(rs3) == int(rs2)*3 :
                 state=True
