@@ -70,7 +70,7 @@ def blind_base(url):
             rs1=response_time(r1)
             r2=inject(url,str(x).format('2'))
             rs2=response_time(r2)
-            r3=inject(url,str(x).format('4'))
+            r3=inject(url,str(x).format('6'))
             rs3=response_time(r3)
             if int(rs1) < int(rs2) and int(rs2) < int(rs3) and int(rs3) == int(rs2)*3 :
                 state=True
