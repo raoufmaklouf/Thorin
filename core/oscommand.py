@@ -22,7 +22,7 @@ def build_wordlist():
     return words
 
 def run(word_queue,url):
-    
+    state=False
     while not word_queue.empty():
         attempt = word_queue.get()
         attempt_list = []
@@ -30,6 +30,8 @@ def run(word_queue,url):
 
        
         for brute in attempt_list:
+            if state==True:
+                break
             user_agent=random.choice(regex.USR_AGENTS)
             headers = {'User-Agent': user_agent }   
             try:
@@ -37,6 +39,7 @@ def run(word_queue,url):
                 r = requests.get(url,headers=headers ,verify=False )
                 cont = r.content
                 if "uid=" and "gid=" and "groups=" in str(cont):
+                    state=True
                     print("\033[91mPossibly OS Command injection vulnerability\033[00m  "+url)
                     break
                 else:
