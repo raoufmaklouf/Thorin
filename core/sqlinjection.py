@@ -43,14 +43,14 @@ def error_base(url):
     state=False
     try:
         r1=requests.get(inject(url,'test')).text
-        sr1=r1.status_code
         r2=requests.get(inject(url,'test')).text
-        sr2=r1.status_code
-        if len(r1)==len(r2) and sr1 == sr2:
+        if len(r1)==len(r2) :
             for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
                 god_r=requests.get(inject(url,god)).text
+                sr1=god_r.status_code
                 bad_r=requests.get(inject(url,bad)).text
-                if len(god_r) != len(bad_r):
+                sr2=bad_r.status_code
+                if len(god_r) != len(bad_r) and sr1 == sr2:
                     state=True
                     print('\033[33;1mWarning can be false positives\033[00m') 
                     print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
