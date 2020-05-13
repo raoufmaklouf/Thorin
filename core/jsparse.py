@@ -8,7 +8,7 @@ from core import nano
 
 
 def jsparse_(url):
-    if nano.rev(url).split('.')[0] == nano.rev('js') or ".js?ver=" in url:
+    if nano.rev(url).split('.')[0] == nano.rev('js') :
         try:
             user_agent=random.choice(regex.USR_AGENTS)
             headers = {'User-Agent': user_agent } 
