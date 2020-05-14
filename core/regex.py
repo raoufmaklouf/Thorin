@@ -1,3 +1,17 @@
+SQL_ERROR=[
+"SQL syntax.*MySQL", "Warning.*mysql_.*", "valid MySQL result", "MySqlClient\.",
+"PostgreSQL.*ERROR", "Warning.*\Wpg_.*", "valid PostgreSQL result", "Npgsql\.",
+"Driver.* SQL[\-\_\ ]*Server", "OLE DB.* SQL Server", "(\W|\A)SQL Server.*Driver",
+"Warning.*mssql_.*","(\W|\A)SQL Server.*[0-9a-fA-F]{8}",
+"(?s)Exception.*\WSystem\.Data\.SqlClient\.", "(?s)Exception.*\WRoadhouse\.Cms\.",
+"Microsoft Access Driver", "JET Database Engine", "Access Database Engine",
+"\bORA-[0-9][0-9][0-9][0-9]", "Oracle error", "Oracle.*Driver", "Warning.*\Woci_.*", "Warning.*\Wora_.*",
+"CLI Driver.*DB2", "DB2 SQL error", "\bdb2_\w+\(",
+"SQLite/JDBCDriver", "SQLite.Exception", "System.Data.SQLite.SQLiteException", "Warning.*sqlite_.*", 
+"Warning.*SQLite3::", "\[SQLITE_ERROR\]",
+"(?i)Warning.*sybase.*", "Sybase message", "Sybase.*Server message.*"
+]
+
 SQL_INJECTION_ERROR_BASE={
 "%20OR%201=1%20":"%20OR%201=0%20",
 "%20OR%20x=x":"%20OR%20x=y",
@@ -201,19 +215,7 @@ payload_ssti_1=["%7B%7B88*668%7D%7D","{{88*668}}","%3C%25%3D%2088%20%2a%20668%20
 payload_ssti_2=["%7B%7B95*338%7D%7D","{{95*338}}","%3C%25%3D%2095%20%2a%20338%20%25%3E","<%=95*338%>",
 "%23%7B%2095%20%2a%20338%20%7D","#{95*338}","%24%7B95%2a338%7D","${95*338}","%24%7B%7B95%2a338%7D%7D","${{95*338}}",
 "%23%7B95%2a338%7D","%23%7B%7B95%2a338%7D%7D","#{{95*338}}"]
-SQL_ERROR=[
-"SQL syntax.*MySQL", "Warning.*mysql_.*", "valid MySQL result", "MySqlClient\.",
-"PostgreSQL.*ERROR", "Warning.*\Wpg_.*", "valid PostgreSQL result", "Npgsql\.",
-"Driver.* SQL[\-\_\ ]*Server", "OLE DB.* SQL Server", "(\W|\A)SQL Server.*Driver",
-"Warning.*mssql_.*","(\W|\A)SQL Server.*[0-9a-fA-F]{8}",
-"(?s)Exception.*\WSystem\.Data\.SqlClient\.", "(?s)Exception.*\WRoadhouse\.Cms\.",
-"Microsoft Access Driver", "JET Database Engine", "Access Database Engine",
-"\bORA-[0-9][0-9][0-9][0-9]", "Oracle error", "Oracle.*Driver", "Warning.*\Woci_.*", "Warning.*\Wora_.*",
-"CLI Driver.*DB2", "DB2 SQL error", "\bdb2_\w+\(",
-"SQLite/JDBCDriver", "SQLite.Exception", "System.Data.SQLite.SQLiteException", "Warning.*sqlite_.*", 
-"Warning.*SQLite3::", "\[SQLITE_ERROR\]",
-"(?i)Warning.*sybase.*", "Sybase message", "Sybase.*Server message.*"
-]
+
 payload_crlf=["%%0a0aSet-Cookie:crlf=injection",
 "%0aSet-Cookie:crlf=injection","%0d%0aSet-Cookie:crlf=injection",
 "%0dSet-Cookie:crlf=injection","%23%0aSet-Cookie:crlf=injection","%23%0d%0aSet-Cookie:crlf=injection",
