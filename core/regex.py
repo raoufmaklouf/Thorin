@@ -206,9 +206,9 @@ parameters_OR=[
 'validate','domain','callback','return','page','view','dir','show','file','document','folder','root',
 'path','pg','style','pdf','template','php_path','doc','feed','host','port','to','out','navigation','open','result'
 ] 
-XSS={'a<T"rSAF45>':'a%3CT%22rSAF45%3E','a<T"rSAF45':'a%3CT%22rSAF45','TrSAF45<':'TrSAF45%3C','<TrSAAF45':'<TrSAAF45',
-'TrSAAFF45<':'TrSAAFF45<','TrSAAF45<':'TrSAAF45%3C','TrSAAF45>':'TrSAAF45>','TrSA<F45':'TrSA%3CF45','TrSA>F45':'TrSA%3EF45',
-'TrSA<AF45':'TrSA<AF45','TrSA>AF45':'TrSA>AF45'}
+XSS={'a<T"rSAF45>':'a%3CT%22rSAF45%3E','a<T"rSAF45':'a%3CT%22rSAF45','TrS"AF45<':'TrS%22AF45%3C','<TrSA"AF45':'<TrSA"AF45',
+'TrSAAFF"45<':'TrSAAFF"45<','TrSAA"F45<':'TrSAA%22F45%3C','TrSA"AF45>':'TrSA"AF45>','Tr"SA<F45':'Tr%22SA%3CF45',
+'TrSA>F"45':'TrSA%3EF%2245','TrSA<AF4"5':'TrSA<AF4"5','T"rSA>AF45':'T"rSA>AF45'}
 payload_ssti_1=["%7B%7B88*668%7D%7D","{{88*668}}","%3C%25%3D%2088%20%2a%20668%20%25%3E","<%=88*668%>",
 "%23%7B%2088%20%2a%20668%20%7D","#{88*668}","%24%7B88%2a668%7D","${88*668}","%24%7B%7B88%2a668%7D%7D","${{88*668}}",
 "%23%7B88%2a668%7D","%23%7B%7B88%2a668%7D%7D","#{{88*668}}"]
