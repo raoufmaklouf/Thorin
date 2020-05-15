@@ -66,13 +66,13 @@ def blind_base(url):
     state=False
     try:
         for x in regex.SQL_INJECTION_BLIND_BASE:
-            r1=inject(url,str(x).format('0'))
+            r1=inject(url,str(x).format('2'))
             rs1=response_time(r1)
-            r2=inject(url,str(x).format('2'))
+            r2=inject(url,str(x).format('6'))
             rs2=response_time(r2)
-            r3=inject(url,str(x).format('6'))
+            r3=inject(url,str(x).format('9'))
             rs3=response_time(r3)
-            if int(rs1) < int(rs2) and int(rs2) < int(rs3) and int(rs3) >= int(rs2)*3 and int(rs3) >= 6:
+            if int(rs1) < int(rs2) and int(rs2) >= int(rs1)*3  and int(rs3) > int(rs2)+int(rs1) and int(rs3) >= 9 and int(rs2)>= 6:
                 state=True
                 print("\033[91mPossibly SQL injection  vulnerability\033[00m  ")
                 print(r1+' | Response time:'+str(rs1)+'\n'+r2+' | Response time:'+str(rs2)+'\n'+r3+' | Response time:'+str(rs3))
