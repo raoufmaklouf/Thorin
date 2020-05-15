@@ -21,7 +21,7 @@ def ssti_(url):
                     r = requests.get(nano.inject_param(url,i),verify=False,timeout=10)
                     cont2 = r.content
                     if(re.search(test2, str(cont2))):
-                         print("\033[91m Possibly SS template injection vulnerability\033[00m\t"+v)
+                         print("\033[91m Possibly SS template injection vulnerability\033[00m\t"+nano.inject_param(url,i))
                          break
                     else:
                          pass
