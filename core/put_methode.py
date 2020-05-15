@@ -17,7 +17,7 @@ def putmethode_(url):
     try:
         r=requests.put(url, data, headers=headers, verify=False)
         scode=r.status_code
-        if "2" in str(scode):
+        if (scode):
             re=requests.get(url,headers=headers,verify=False)
             res=re.content
             
