@@ -88,19 +88,25 @@ def semple(url):
     headers = {'User-Agent': user_agent } 
     payload=["'",'"',";","#","-","--","--+"]
     
-    for x in payload: 
+    for i in payload: 
         if done ==1 :
             break
         try:
-            url=nano.inject_param(url,"x"+x)
+            url=nano.inject_param(url,"x"+i)
             r = requests.get(url,headers=headers,verify=False)
             cont = r.content
             for x in regex.SQL_ERROR:
                 if(re.search(x, str(cont))):
-                    state=True
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
-                    done=1
-                    break
+                    url_=nano.inject_param(url,"x")
+                    r_ = requests.get(url_,headers=headers,verify=False)
+                    cont_ = r_.content
+                    if(re.search(x, str(cont_))):
+                        pass
+                    else:
+                        state=True
+                        print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
+                        done=1
+                        break
         except:
             pass
                
