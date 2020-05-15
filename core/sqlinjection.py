@@ -75,7 +75,7 @@ def blind_base(url):
             if int(rs1) < int(rs2) and int(rs2) >= int(rs1)*3  and int(rs3) > int(rs2)+int(rs1) and int(rs3) >= 9 and int(rs2)>= 6:
                 state=True
                 print("\033[91mPossibly SQL injection  vulnerability\033[00m  ")
-                print(r1+' | Response time:'+str(rs1)+'\n'+r2+' | Response time:'+str(rs2)+'\n'+r3+' | Response time:'+str(rs3))
+                print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
                 break
     except:
         pass
