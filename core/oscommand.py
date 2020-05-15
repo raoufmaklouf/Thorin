@@ -50,7 +50,7 @@ def run(word_queue,url):
 
 word_queue = build_wordlist()
 def oscommand_(url):
-    if '.js?' not in str(url) or nano.rev(str(url)).split('.')[0] != nano.rev('js'):
+    if '.js?' not in str(url) and nano.rev(str(url)).split('.')[0] != nano.rev('js'):
         for i in range(threads):
             t = threading.Thread(target=run,args=(word_queue,url))
             t.start()
