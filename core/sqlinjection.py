@@ -95,7 +95,7 @@ def semple(url):
         if done ==1 :
             break
         try:
-            url=nano.inject_param(url,"x"+i)
+            url=inject(url,i)
             r = requests.get(url,headers=headers,verify=False)
             cont = r.content
             for x in regex.SQL_ERROR:
