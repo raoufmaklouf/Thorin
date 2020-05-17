@@ -33,7 +33,13 @@ def xss_(link):
                 resp = r.content
                 x = re.findall(rg, str(resp))
                 if (x):
-                    print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
+                    if 'text/html' in str(ContentType):
+                        print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
+                        break
+                    else:
+                        print('\033[33;1mWarning can be false positives  Content Type: {}\033[00m').format(str(ContentType))
+                        print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
+                        break
                 else:
                     pass
             except:
