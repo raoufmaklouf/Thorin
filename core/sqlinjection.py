@@ -46,10 +46,12 @@ def error_base(url):
         r2=requests.get(inject(url,'test')).text
         if len(r1)==len(r2) :
             for god,bad in regex.SQL_INJECTION_ERROR_BASE.items():
-                god_r=requests.get(inject(url,god)).text
-                sr1=god_r.status_code
-                bad_r=requests.get(inject(url,bad)).text
-                sr2=bad_r.status_code
+                r1=requests.get(inject(url,god))
+                god_r=r1.content
+                sr1=r1.status_code
+                r2=requests.get(inject(url,bad))
+                bad_r=r2.content
+                sr2=r2.status_code
                 if len(god_r) != len(bad_r) and sr1 == sr2:
                     state=True
                     print('\033[33;1mWarning can be false positives\033[00m') 
@@ -60,7 +62,6 @@ def error_base(url):
     except:
         pass
     return state
-
 
 def blind_base(url):
     state=False
