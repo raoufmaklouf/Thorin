@@ -18,18 +18,14 @@ def dir_(url):
                     try:
                         decodebs64=base64.b64decode(m)
                         try:
-                        
-                            Decode=decodebs64.encode('utf-8')
-                            if "\\x" not in str(Decode):
+    
+                            if "\\x" not in str(decodebs64):
                                 print("\033[94m[INFO] Possibly base64 on url:\033[00m {} ".format(nano.search_color(str(m),url)))
                                 print("\033[32m[decode is] ----------|\033[00m "+str(decodebs64))
                         
                         except UnicodeError:
                             pass
-                    
-                    
- 
-                    
+
                     except binascii.Error:
                         pass
     except:
@@ -59,17 +55,13 @@ def param_(url):
                         decodebs64=base64.b64decode(m)
                         try:
                         
-                            Decode=decodebs64.encode('utf-8')
-                            if "\\x" not in str(Decode):
+                            if "\\x" not in str(decodebs64):
                                 print("\033[94m[INFO] Possibly base64 on url:\033[00m {} ".format(nano.search_color(str(m),url)))
                                 print("\033[32m[decode is] ----------|\033[00m "+str(decodebs64))
                         
                         except UnicodeError:
                             pass
-                    
-                    
- 
-                    
+               
                     except binascii.Error:
                         pass
 
@@ -81,4 +73,3 @@ def param_(url):
 def Base64_(url):
     dir_(url)
     param_(url)
-
