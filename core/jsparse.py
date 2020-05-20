@@ -1,4 +1,5 @@
 import re
+import random
 import requests
 from core import regex
 from core import nano
