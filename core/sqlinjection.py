@@ -109,7 +109,7 @@ def semple(url):
                     r_ = requests.get(url_,headers=headers,verify=False)
                     cont_ = r_.content
                     if(re.search(x, str(cont_))):
-                        pass
+                        break
                     else:
                         state=True
                         print("\033[91mPossibly SQL injection vulnerability\033[00m  "+url)
