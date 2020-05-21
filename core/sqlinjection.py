@@ -39,7 +39,7 @@ def response_time(url):
 
 
 
-def error_base(url):
+def bolian_base(url):
     state=False
     try:
         r1=requests.get(inject(url,'test')).text
@@ -54,7 +54,6 @@ def error_base(url):
                 sr2=r2.status_code
                 if len(god_r) != len(bad_r) and sr1 == sr2:
                     state=True
-                    print('\033[33;1mWarning can be false positives\033[00m') 
                     print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
                     print(inject(url,god)+' | response Length:'+str(len(god_r))+'\n'+inject(url,bad)+' | response Length:'+str(len(bad_r)))
                     break
@@ -63,8 +62,9 @@ def error_base(url):
         pass
     return state
 
-def blind_base(url):
-    state=False
+
+def time_base(url): 
+        
     try:
         for x in regex.SQL_INJECTION_BLIND_BASE:
             r1=inject(url,str(x).format('3'))
@@ -76,15 +76,19 @@ def blind_base(url):
             if int(rs1) >= 3 and int(rs2) >= 6 and int(rs3) >= 9:
                 if int(rs1) >= int(rs2)/2 and int(rs1) >= int(rs3)/3:
                       if int(rs2) >= int(rs1)*2 and int(rs3) >=int(rs1)*3:
-                           state=True
-                           print('\033[33;1mWarning can be false positives\033[00m') 
-                           print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                           print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                           t=bolian_base(url)
+                           if t==True:
+                               print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                               break
+                           
+                           else:
+                               print('\033[33;1mWarning can be false positives\033[00m') 
+                               print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                               print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
                            break
     except:
         pass
-    return state
-  
+    
 def semple(url):
     state=False
     done=0
@@ -120,6 +124,4 @@ def semple(url):
 def sqlinjection_(url):
     task1=semple(url)
     if task1 == False:
-        task2=error_base(url)
-        if task2 == False:
-            blind_base(url)
+        time_base(url)
