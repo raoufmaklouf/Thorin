@@ -37,9 +37,13 @@ def run(word_queue,url):
                url=url.replace("'","")
                r = requests.get(url,headers=headers,verify=False)
                resp= r.content
-               if(re.search(':x:', str(resp))):
-                   print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
-                   break
+               if(re.search('root:', str(resp))):
+                   if(re.search('bin:', str(resp))):
+                        if(re.search('nobody:', str(resp))):
+                              if(re.search(':x:', str(resp))):
+                                   print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
+                                   break
+ 
                else:
                    pass
             except:
@@ -70,9 +74,13 @@ def run_dir(word_queue,url):
                 url=url.replace("'","")
                 r = requests.get(url,verify=False)
                 resp= r.content
-                if(re.search(':x:', str(resp))):
-                    print("\033[91m Possibly LFI vulnerability\033[00m  "+url)
-                    break
+                if(re.search('root:', str(resp))):
+                   if(re.search('bin:', str(resp))):
+                        if(re.search('nobody:', str(resp))):
+                              if(re.search(':x:', str(resp))):
+                                   print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
+                                   break
+                                   
                 else:
                     pass
             except:
