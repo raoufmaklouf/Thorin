@@ -93,6 +93,10 @@ with alive_bar(len(urls)) as bar:
         p2.start()
         p4 = Process(target=base64F, args=(i,))
         p4.start()
+        if '?' not in i:
+            sleep(0.2)
+        else:
+            pass
         
         
         
