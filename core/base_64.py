@@ -9,7 +9,7 @@ def dir_(url):
         
         Dir=str(url).split('/')
         for item in Dir:
-            if item not in regex.Base_64_white_list:
+            if item not in regex.Base_64_white_list and len(item) > 10:
                 mutch=re.search("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$",item)
                 if(mutch):
                     m=mutch.group()
@@ -46,7 +46,7 @@ def param_(url):
                         
             fstring=x.split('=')[1]
             fstring+=c
-            if fstring not in regex.Base_64_white_list:
+            if fstring not in regex.Base_64_white_list and len(fstring) > 10:
                 mutch=re.search("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$",fstring)
                 if(mutch):
                     m=mutch.group()
