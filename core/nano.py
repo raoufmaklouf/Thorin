@@ -26,6 +26,24 @@ def inject_dir(link,pay):
     return inject_urls
 
 
+def inject(link,pay):
+    b_link=link.split('?')[0]
+    params=link.split('?')[1]
+    if len(params) >0:
+        param_list=[]
+        Plenth=params.split('&')
+        for z in Plenth:
+            param=z.split('=')[0]
+            val=z.split('=')[1]
+            if param not in param_list:
+                param_list.append(param)
+            payload=(b_link+'?')
+            for y in param_list:
+                payload=(payload+y+'='+val+pay+'&')
+            payload=payload[:-1]
+        return payload
+
+
 
 def inject_param(link,pay):
     b_link=link.split('?')[0]
