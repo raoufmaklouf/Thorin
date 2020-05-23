@@ -178,7 +178,6 @@ REGEX_JS = {
 "github_access_token": "[a-zA-Z0-9_-]*:[a-zA-Z0-9_\\-]+@github\\.com*",
 "private_ssh_key": "-----BEGIN PRIVATE KEY-----[a-zA-Z0-9\\S]{100,}-----END PRIVATE KEY-----",
 "private_rsa_key": "-----BEGIN RSA PRIVATE KEY-----[a-zA-Z0-9\\S]{100,}-----END RSA PRIVATE KEY-----",
-"AMAZON_URL_1":"[a-z0-9.-].amazonaws.com",
 "AMAZON_URL_2":"[a-z0-9.-].s3-[a-z0-9.-][.-](eu|ap|us|ca|sa|cn)",
 "AMAZON_URL_3":"s3.amazonaws.com/[a-z0-9._-]",
 "AMAZON_URL_4":"s3-[a-z0-9-].amazonaws.com/[a-z0-9._-]",
