@@ -17,13 +17,13 @@ def trace_(url):
             try:
                 resp = requests.get(url)
                 scode=resp.status_code
-                if '2' in str(scode) :
+                if str(scode)[0] =='2':
                     r="\033[32m[{}]\033[00m".format(str(scode))
-                elif  '3' in str(scode):
+                elif  str(scode)[0] =='3':            
                     r="\033[36m[{}]\033[00m".format(str(scode))
-                elif '4' in  str(scode) :
+                elif  str(scode)[0] =='4':
                     r="\033[95m[{}]\033[00m".format(str(scode))
-                elif '5' in str(scode) :
+                elif  str(scode)[0] =='5':
                     r="\033[35m[{}]\033[00m".format(str(scode))
                 else:
                     r=scode
@@ -32,6 +32,3 @@ def trace_(url):
                 pass
         else:
             pass
-
-            
-            
