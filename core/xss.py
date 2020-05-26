@@ -22,7 +22,7 @@ def xss_(link):
                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                         break
                     else:
-                        print('\033[33;1mWarning can be false positives  Content Type: {}\033[00m').format(str(ContentType))
+                        print('\033[33;1mWarning can be false positives \033[00m')
                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                         break
                 else:
@@ -41,7 +41,7 @@ def xss_(link):
                                     print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                     break
                                 else:
-                                    print('\033[33;1mWarning can be false positives  Content Type: {}\033[00m').format(str(ContentType))
+                                    print('\033[33;1mWarning can be false positives \033[00m')
                                     print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                     break
                             else:
@@ -54,7 +54,7 @@ def xss_(link):
                                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                         break
                                     else:
-                                        print('\033[33;1mWarning can be false positives  Content Type: {}\033[00m').format(str(ContentType))
+                                        print('\033[33;1mWarning can be false positives \033[00m')
                                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                 
                         except:
@@ -82,7 +82,7 @@ def xss_dir(link):
                     if 'text/html' in str(ContentType):
                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                     else:
-                        print('\033[33;1mWarning can be false positives  Content Type: {}\033[00m').format(str(ContentType))
+                        print('\033[33;1mWarning can be false positives\033[00m')
                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
 
                 else:
