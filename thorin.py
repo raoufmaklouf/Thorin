@@ -72,7 +72,9 @@ def crlf_dirF(i):
     crlf.crlf_dir(i)
 
  
+print("Endpoints are being collected ...")  
 urls= archiveurl.waybackurls(url)
+os.system("clear")
 with alive_bar(len(urls)) as bar:
     for i in urls:
         for uniq_url in nano.inject_dir(i,"uNiq_stRiNg"):
