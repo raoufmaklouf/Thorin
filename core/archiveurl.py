@@ -23,7 +23,6 @@ def waybackurls(host):
             x=x.replace(':80', '')
         except:
             pass
-        if x not in cont:
-            cont.append(x)
+        cont.append(x)
    
     return cont
