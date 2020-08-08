@@ -4,7 +4,7 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 **Vulnerability:** 
 * xss 
 * open redirection 
-* sql injection simple and blind and error base 
+* sql injection  
 * local file inclusion 
 * server-side template injection 
 * crlf 
