@@ -4,7 +4,10 @@ import random
 from core import regex
 from core import nano
 
-    
+from requests.packages import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
+
+
 def xss_(link):
    
     if nano.reflection(link) == True:
@@ -35,8 +38,8 @@ def xss_(link):
                             r = requests.get(url ,headers=headers ,verify=False )
                             resp = r.content 
                             ContentType=r.headers.get('Content-Type')   
-                            x = re.findall(rg, str(resp))
-                            if (x):
+                            x1 = re.findall(rg, str(resp))
+                            if (x1):
                                 if 'text/html' in str(ContentType):
                                     print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                     break
@@ -48,8 +51,8 @@ def xss_(link):
                                 r = requests.post(url ,headers=headers ,verify=False )
                                 resp = r.content 
                                 ContentType=r.headers.get('Content-Type')   
-                                x = re.findall(rg, str(resp))
-                                if (x):
+                                x2 = re.findall(rg, str(resp))
+                                if (x2):
                                     if 'text/html' in str(ContentType):
                                         print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
                                         break
