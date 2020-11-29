@@ -86,7 +86,7 @@ def run_dir(word_queue,url):
             try:
                 r = requests.get(url,headers=headers,verify=False)
                 resp=r.content       
-                if len(r.history)>0 and "<title>Google</title>" in str(resp) :
+                if "Location" in r.headers and "google" in r.headers :
                     print('\033[91m Possibly open redirection vulnerability\033[00m  '+url)
                     break
                 else:
