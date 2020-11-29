@@ -46,7 +46,7 @@ def run(word_queue,url):
                         try:         
                             r = requests.get(url, headers=headers,verify=False)
                             resp=r.content       
-                            if len(r.history)>0 and "<title>Google</title>" in str(resp) :
+                            if  "Location" in r.headers and "google" in r.headers :
                                 print('\033[91m Possibly open redirection vulnerability\033[00m\t'+url)
                                 break
                             else:
@@ -100,4 +100,3 @@ def redirect_dir(url):
         t = threading.Thread(target=run_dir,args=(word_queue_dir,url))
         t.start()
        
-
