@@ -1,8 +1,9 @@
-# Thorin
+# Thorin v2
 The tool collects endpoints from web archive and analyzes it and scan it from many vulnerabilities
 ## Features 
 **Vulnerability:** 
 * xss 
+* ssrf
 * open redirection 
 * sql injection  
 * local file inclusion 
@@ -29,7 +30,8 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 
 **Run:**
 
-`python3 thorin.py domain.com
+`python3 thorin.py -d domain.com
+ python3 thorin.py -f endpointfile.txt
 `
 
 `python3 thorin.py sub.domain.com
