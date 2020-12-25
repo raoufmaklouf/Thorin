@@ -11,7 +11,9 @@ from core import jsparse
 from core import oscommand
 from core import put_methode
 from core import cors
+from core import ssrf
 from core import base_64
+from core import dirvulscan
 from multiprocessing import Process
 from alive_progress import alive_bar
 import sys
@@ -19,10 +21,29 @@ import os
 from time import sleep
 
 
-url=sys.argv[1]
-os.system('resize -s 25 120 > /dev/null')
-connter=[] 
-uniq=[]
+urlslist=[]
+if sys.argv[1] =='-f':
+    file_=sys.argv[2]
+    f=open(file_,'r')
+    for x in f :
+        x=x.rstrip()
+        urlslist.append(x)
+    urls=urlslist
+elif sys.argv[1] =='-d':
+    url=sys.argv[2]
+    urls= archiveurl.waybackurls(url)
+     
+    
+else:
+    print('''usage: python3 thorin.py -f endpoint.txt
+       python3 thorin.py -d www.site.com      
+    ''')
+    sys.exit()
+
+   
+
+paramlink=[] 
+uniqlink=[]
 def xssF(i):
     xss.xss_(i)
 
@@ -55,38 +76,21 @@ def put_methodeF(i):
 
 def corsF(i):
     cors.cors_(i)
+
+def ssrfF(i):
+    ssrf.ssrf_(i)
     
 def base64F(i):
     base_64.Base64_(i)
 
-def redirection_dirF(i):
-    redirect.redirect_dir(i)
+def dirvulscanF(i):
+    dirvulscan.run(i)
 
-def xss_dirF(i):
-    xss.xss_dir(i)
-
-def lfi_dirF(i):
-    lfi.lfi_dir(i)
-
-def crlf_dirF(i):
-    crlf.crlf_dir(i)
 
  
-print("Endpoints are being collected ...")  
-urls= archiveurl.waybackurls(url)
-os.system("clear")
+
 with alive_bar(len(urls)) as bar:
     for i in urls:
-        for uniq_url in nano.inject_dir(i,"uNiq_stRiNg"):
-             if uniq_url not in uniq:
-                 uniq.append(uniq_url)
-        if "?" in i:
-            uniq_link=nano.inject_param(i,'yaTi8CP7Efh')
-   
-        else:
-            uniq_link=i
-            
-        
         bar()
         i=i.rstrip()
         p1 = Process(target=traceF, args=(i,))
@@ -95,48 +99,62 @@ with alive_bar(len(urls)) as bar:
         p2.start()
         p4 = Process(target=base64F, args=(i,))
         p4.start()
-        if '?' not in i:
-            sleep(0.2)
-        else:
-            pass
-        
-        
-        
-        
-        if uniq_link not in connter:
-            connter.append(uniq_link)
-            if '?' in i:
-                p6 = Process(target=xssF, args=(i,))
-                p6.start()
-                p7 = Process(target=open_redirectionF, args=(i,))
-                p7.start()
-                
-                p8 = Process(target=sqlscanF, args=(i,))
-                p8.start()
-                p9= Process(target=sstiscanF, args=(i,))
-                p9.start()
-                p10 = Process(target=lfiscanF, args=(i,))
-                p10.start()
-                p11 = Process(target=crlfscanF, args=(i,))
-                p11.start()
-                p12 = Process(target=oscommandF, args=(i,))
-                p12.start()
-                sleep(0.5)
 
-with alive_bar(len(uniq)) as bar:
-    for i in uniq:
-        sleep(1.2)
-        i=i.rstrip()
-        bar()
-        p5 = Process(target=corsF, args=(i,))
-        p5.start()
-        p3 = Process(target=put_methodeF, args=(i,))
-        p3.start()
-        p14 = Process(target=redirection_dirF, args=(i,))
-        p14.start()
-        p15 = Process(target=xss_dirF, args=(i,))
-        p15.start()
-        p16 = Process(target=lfi_dirF, args=(i,))
-        p16.start()
-        p17 = Process(target=crlf_dirF, args=(i,))
-        p17.start()
+        if "?" in i:
+            path=i.split('?')[0]
+            for dlink in nano.inject_dir(path):
+                if dlink not in uniqlink :
+                    uniqlink.append(dlink)
+                    url=dlink
+                    px = Process(target=dirvulscanF, args=(url,))
+                    px.start()
+                    sleep(2)
+                else:
+                    pass
+                   
+
+
+            plink=nano.inject_param(i,'yaTi8CP7Efh')
+            if plink not in paramlink:
+                 paramlink.append(plink)
+                 url=plink
+                 p6 = Process(target=xssF, args=(url,))
+                 p6.start()
+                 sleep(0.5)
+                 p7 = Process(target=open_redirectionF, args=(url,))
+                 p7.start()
+                 sleep(0.5)
+                 p8 = Process(target=sqlscanF, args=(url,))
+                 p8.start()
+                 sleep(0.5)
+                 p9= Process(target=sstiscanF, args=(url,))
+                 p9.start()
+                 sleep(0.5)
+                 p10 = Process(target=lfiscanF, args=(url,))
+                 p10.start()
+                 sleep(1)
+                 p11 = Process(target=crlfscanF, args=(url,))
+                 p11.start()
+                 sleep(0.5)
+                 p12 = Process(target=oscommandF, args=(url,))
+                 p12.start()
+                 sleep(0.5)
+                 p13 = Process(target=ssrfF, args=(url,))
+                 p13.start()
+                 sleep(0.5)
+            else:
+                pass
+        else:
+            for dlink in nano.inject_dir(i):
+                if dlink not in uniqlink :
+                    uniqlink.append(dlink)
+                    url=dlink
+                    px = Process(target=dirvulscanF, args=(url,))
+                    px.start()
+                    sleep(2)
+                else:
+                    pass
+        
+            
+                    
+        
