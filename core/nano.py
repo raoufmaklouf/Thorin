@@ -1,7 +1,7 @@
 import requests
 import re
 
-def inject_dir(link,pay):
+def inject_dir1(link,pay):
     if link[-1] =="/":
         link=link[:-1]
     else:
@@ -24,6 +24,32 @@ def inject_dir(link,pay):
         wold+='/'+link.split('/')[x]
         inject_urls.append(payload)
     return inject_urls
+
+
+
+def inject_dir(link):
+    inject_urls=[]
+    if link[-1] =="/":
+        link=link[:-1]
+    else:
+        pass
+    
+    protocol=link.split(":")[0]
+    try:
+        link=link.replace('http://','')
+        link=link.replace('https://','')
+    except:
+        pass
+    main_ulr=link.split('/')[0]
+    wold=protocol+'://'+main_ulr
+    for x in range(1,len(link.split('/'))):
+       
+        wold+='/'+link.split('/')[x]
+        inject_urls.append(wold)
+       # print(wold)
+        
+    return inject_urls
+
 
 
 def inject(link,pay):
