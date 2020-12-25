@@ -30,11 +30,14 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 
 **Run:**
 
-`python3 thorin.py -d domain.com
+`python3 thorin.py -d domain.com & python3 thorin.py -d sub.domain.com
+
+
  python3 thorin.py -f endpointfile.txt
 `
 
-`python3 thorin.py sub.domain.com
+`
+
 `
 
 ![Alt text](https://raw.githubusercontent.com/raoufmaklouf/Thorin/master/pictures/Screenshot%20at%202020-04-20%2014-50-45.jpg?raw=true "Title")
