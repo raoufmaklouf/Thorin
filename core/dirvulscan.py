@@ -228,12 +228,12 @@ def lfi_(i):
         except:
             pass
 
-def backupfile(i):
+def backupfile_(i):
     filename=[]
     ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',
     '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
     '.vb','.0','.1','.2','.arc','.inc','.lst',]
-    
+    urls=[]
     def rev(str_):
         linth=len(str_)
         rs=''
@@ -266,17 +266,26 @@ def backupfile(i):
     filename.append(basename)
     for x in filename:
         for p in ext:
-            print(i+'/'+x+p)
+            link1=i+'/'+x+p
+            url.append(link1)
     for b in  ext:
-        print(i+'/'+b)
-    
+        link2=i+'/'+b
+        url.append(link2)
+    testlink=i+'/uniq_StriNg'
+    test_r = requests.head(testlink,verify=False)
+    test_scode=test_r.status_code
+    for url in urls:
+        try:
+            r = requests.head(url,verify=False)
+            scode=r.status_code
+            contentlength=r.headers.get('Content-Length')
+            if '2' in str(scode) :
+                if str(scode) != str(test_scode):
+                    print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+url)
+        except:
+            pass
 
 def run(i):
-    git_(i)
-    xss_(i)
-    crlf_(i)
-    openredaraction_(i)
-    lfi_(i)
     p1 = Process(target=git_, args=(i,))
     p1.start()
     p2 = Process(target=xss_, args=(i,))
@@ -287,10 +296,8 @@ def run(i):
     p4.start()
     p5 = Process(target=lfi_, args=(i,))
     p5.start()
+    p6=Process(target=backupfile_, args=(i,))
+    p6.start()
              
-
-
-
-
 
 
