@@ -10,7 +10,6 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 * server-side template injection 
 * crlf 
 * os comman injection  
-* HTTP PUT Method Enabled
 * cross-origin resource sharing
 
 **Other features:**
