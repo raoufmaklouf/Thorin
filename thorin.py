@@ -7,7 +7,6 @@ from core import lfi
 from core import crlf
 from core import nano
 from core import trace
-from core import jsparse
 from core import oscommand
 from core import cors
 from core import ssrf
