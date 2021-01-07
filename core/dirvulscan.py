@@ -230,8 +230,7 @@ def lfi_(i):
 
 def backupfile_(i):
     filename=[]
-    ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',
-    '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
+    ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',  '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
     '.vb','.0','.1','.2','.arc','.inc','.lst',]
     urls=[]
     def rev(str_):
@@ -267,13 +266,16 @@ def backupfile_(i):
     for x in filename:
         for p in ext:
             link1=i+'/'+x+p
-            url.append(link1)
+            urls.append(link1)
     for b in  ext:
         link2=i+'/'+b
-        url.append(link2)
-    testlink=i+'/uniq_StriNg'
-    test_r = requests.head(testlink,verify=False)
-    test_scode=test_r.status_code
+        urls.append(link2)
+    try:
+        testlink=i+'/uniq_StriNg'
+        test_r = requests.head(testlink,verify=False)
+        test_scode=test_r.status_code
+    except:
+          pass
     for url in urls:
         try:
             r = requests.head(url,verify=False)
@@ -288,16 +290,23 @@ def backupfile_(i):
 def run(i):
     p1 = Process(target=git_, args=(i,))
     p1.start()
+    p1.join()
     p2 = Process(target=xss_, args=(i,))
     p2.start()
+    p2.join()
     p3 = Process(target=crlf_, args=(i,))
     p3.start()
+    p3.join()
     p4 = Process(target=openredaraction_, args=(i,))
     p4.start()
+    p4.join()
     p5 = Process(target=lfi_, args=(i,))
     p5.start()
+    p5.join()
     p6=Process(target=backupfile_, args=(i,))
     p6.start()
+    p6.join()
+
              
 
 
