@@ -290,22 +290,31 @@ def backupfile_(i):
 def run(i):
     p1 = Process(target=git_, args=(i,),daemon=True)
     p1.start()
-    p1.join()
+    
     p2 = Process(target=xss_, args=(i,),daemon=True)
     p2.start()
-    p2.join()
+    
     p3 = Process(target=crlf_, args=(i,),daemon=True)
     p3.start()
-    p3.join()
+    
     p4 = Process(target=openredaraction_, args=(i,),daemon=True)
     p4.start()
-    p4.join()
+    
     p5 = Process(target=lfi_, args=(i,),daemon=True)
     p5.start()
-    p5.join()
+    
     p6=Process(target=backupfile_, args=(i,),daemon=True)
     p6.start()
+    
+
+    p5.join()
+    p4.join()
+    p3.join()
+    p1.join()
+    p2.join()
     p6.join()
+
+    
 
              
 
