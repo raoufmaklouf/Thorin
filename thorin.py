@@ -7,12 +7,11 @@ from core import lfi
 from core import crlf
 from core import nano
 from core import trace
-from core import jsparse
 from core import oscommand
-from core import put_methode
 from core import cors
 from core import ssrf
 from core import base_64
+from core import credentialsFond
 from core import dirvulscan
 from multiprocessing import Process
 from alive_progress import alive_bar
@@ -44,6 +43,7 @@ else:
 
 paramlink=[] 
 uniqlink=[]
+
 def xssF(i):
     xss.xss_(i)
 
@@ -65,14 +65,8 @@ def crlfscanF(i):
 def traceF(i):
     trace.trace_(i)
 
-def jsparseF(i):
-    jsparse.jsparse_(i)
-
 def oscommandF(i):
     oscommand.oscommand_(i)
-
-def put_methodeF(i):
-    put_methode.putmethode_(i)
 
 def corsF(i):
     cors.cors_(i)
@@ -86,6 +80,8 @@ def base64F(i):
 def dirvulscanF(i):
     dirvulscan.run(i)
 
+def credentialsFondF(i):
+    credentialsFond.CredentialsFond_(i)
 
  
 
@@ -95,10 +91,18 @@ with alive_bar(len(urls)) as bar:
         i=i.rstrip()
         p1 = Process(target=traceF, args=(i,))
         p1.start()
-        p2 = Process(target=jsparseF, args=(i,))
-        p2.start()
+        
+        p2 = Process(target=credentialsFondF, args=(i,))
+        p2.start()      
+        
         p4 = Process(target=base64F, args=(i,))
         p4.start()
+
+        p2.join()
+        p1.join()
+        p4.join()
+        
+
 
         if "?" in i:
             path=i.split('?')[0]
@@ -107,41 +111,48 @@ with alive_bar(len(urls)) as bar:
                     uniqlink.append(dlink)
                     url=dlink
                     px = Process(target=dirvulscanF, args=(url,))
-                    px.start()
-                    sleep(2)
+                    px.start()                    
+                    px.join()
                 else:
                     pass
                    
-
 
             plink=nano.inject_param(i,'yaTi8CP7Efh')
             if plink not in paramlink:
                  paramlink.append(plink)
                  url=plink
                  p6 = Process(target=xssF, args=(url,))
-                 p6.start()
-                 sleep(0.5)
+                 p6.start()                 
+                 
                  p7 = Process(target=open_redirectionF, args=(url,))
-                 p7.start()
-                 sleep(0.5)
+                 p7.start() 
+                 
                  p8 = Process(target=sqlscanF, args=(url,))
                  p8.start()
-                 sleep(0.5)
+                 
                  p9= Process(target=sstiscanF, args=(url,))
-                 p9.start()
-                 sleep(0.5)
+                 p9.start()                 
+                 
                  p10 = Process(target=lfiscanF, args=(url,))
-                 p10.start()
-                 sleep(1)
+                 p10.start()                 
+                 
                  p11 = Process(target=crlfscanF, args=(url,))
-                 p11.start()
-                 sleep(0.5)
+                 p11.start()                 
+                 
                  p12 = Process(target=oscommandF, args=(url,))
-                 p12.start()
-                 sleep(0.5)
+                 p12.start()                 
+                 
                  p13 = Process(target=ssrfF, args=(url,))
-                 p13.start()
-                 sleep(0.5)
+                 p13.start()                 
+                 
+                 p13.join()
+                 p12.join()
+                 p11.join()
+                 p10.join()
+                 p9.join()
+                 p6.join()                
+                 p7.join()                 
+                 p8.join()
             else:
                 pass
         else:
@@ -150,11 +161,13 @@ with alive_bar(len(urls)) as bar:
                     uniqlink.append(dlink)
                     url=dlink
                     px = Process(target=dirvulscanF, args=(url,))
-                    px.start()
-                    sleep(2)
+                    px.start()                    
+                    px.join()
                 else:
                     pass
         
-            
+        
+        
+         
                     
         
