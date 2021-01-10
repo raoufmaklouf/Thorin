@@ -280,7 +280,6 @@ def backupfile_(i):
         try:
             r = requests.head(url,verify=False)
             scode=r.status_code
-            contentlength=r.headers.get('Content-Length')
             if '2' in str(scode) :
                 if str(scode) != str(test_scode):
                     print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+url)
