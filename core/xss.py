@@ -65,30 +65,3 @@ def xss_(link):
             except:
                 pass
 
-def xss_dir(link):
-    payload="TrSAF45"
-    try:
-        url=link.replace('uNiq_stRiNg',payload)
-        r = requests.get(url ,verify=False )
-        resp = r.content
-        ref = re.findall("TrSAF45", str(resp))
-        if (ref):
-            for rg,p in regex.XSS.items():
-                user_agent=random.choice(regex.USR_AGENTS)
-                headers = {'User-Agent': user_agent } 
-                url=link.replace('uNiq_stRiNg',p)
-                r = requests.get(url,headers=headers ,verify=False )       
-                resp = r.content
-                ContentType=r.headers.get('Content-Type')
-                x = re.findall(rg, str(resp))
-                if (x):
-                    if 'text/html' in str(ContentType):
-                        print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
-                    else:
-                        print('\033[33;1mWarning can be false positives\033[00m')
-                        print('\033[91mPossibly XSS vulnerability\033[00m  '+url)
-
-                else:
-                    pass
-    except:
-        pass
