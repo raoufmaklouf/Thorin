@@ -14,7 +14,7 @@ def CredentialsFond_(url):
     user_agent=random.choice(regex.USR_AGENTS)
     headers = {'User-Agent': user_agent } 
     try:
-        r = requests.get(i,headers=headers,verify=False)
+        r = requests.get(url,headers=headers,verify=False)
         resp = r.content
         if len(resp)>0:
            for a,b in regex.CredentialsFond_REGEX.items():
