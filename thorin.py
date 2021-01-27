@@ -16,8 +16,8 @@ from core import dirvulscan
 from multiprocessing import Process
 from alive_progress import alive_bar
 import sys
-import os
-from time import sleep
+
+
 
 
 urlslist=[]
@@ -98,9 +98,9 @@ with alive_bar(len(urls)) as bar:
         p4 = Process(target=base64F, args=(i,),daemon=True)
         p4.start()
 
-        p2.join()
-        p1.join()
-        p4.join()
+        p2.join(timeout=5)
+        p1.join(timeout=5)
+        p4.join(timeout=5)
         
 
 
@@ -110,9 +110,9 @@ with alive_bar(len(urls)) as bar:
                 if dlink not in uniqlink :
                     uniqlink.append(dlink)
                     url=dlink
-                    px = Process(target=dirvulscanF, args=(url,),daemon=True)
+                    px = Process(target=dirvulscanF, args=(url,))
                     px.start()                    
-                    px.join()
+                    px.join(timeout=10)
                 else:
                     pass
                    
@@ -121,38 +121,38 @@ with alive_bar(len(urls)) as bar:
             if plink not in paramlink:
                  paramlink.append(plink)
                  url=plink
-                 p6 = Process(target=xssF, args=(url,),daemon=True)
+                 p6 = Process(target=xssF, args=(url,))
                  p6.start()                 
                  
-                 p7 = Process(target=open_redirectionF, args=(url,),daemon=True)
+                 p7 = Process(target=open_redirectionF, args=(url,))
                  p7.start() 
                  
-                 p8 = Process(target=sqlscanF, args=(url,),daemon=True)
+                 p8 = Process(target=sqlscanF, args=(url,))
                  p8.start()
                  
-                 p9= Process(target=sstiscanF, args=(url,),daemon=True)
+                 p9= Process(target=sstiscanF, args=(url,))
                  p9.start()                 
                  
-                 p10 = Process(target=lfiscanF, args=(url,),daemon=True)
+                 p10 = Process(target=lfiscanF, args=(url,))
                  p10.start()                 
                  
-                 p11 = Process(target=crlfscanF, args=(url,),daemon=True)
+                 p11 = Process(target=crlfscanF, args=(url,))
                  p11.start()                 
                  
-                 p12 = Process(target=oscommandF, args=(url,),daemon=True)
+                 p12 = Process(target=oscommandF, args=(url,))
                  p12.start()                 
                  
-                 p13 = Process(target=ssrfF, args=(url,),daemon=True)
+                 p13 = Process(target=ssrfF, args=(url,))
                  p13.start()                 
                  
-                 p13.join()
-                 p12.join()
-                 p11.join()
-                 p10.join()
-                 p9.join()
-                 p6.join()                
-                 p7.join()                 
-                 p8.join()
+                 p13.join(timeout=5)
+                 p12.join(timeout=5)
+                 p11.join(timeout=5)
+                 p10.join(timeout=10)
+                 p9.join(timeout=5)
+                 p6.join(timeout=5)                
+                 p7.join(timeout=5)                 
+                 p8.join(timeout=5)
             else:
                 pass
         else:
@@ -162,7 +162,7 @@ with alive_bar(len(urls)) as bar:
                     url=dlink
                     px = Process(target=dirvulscanF, args=(url,),daemon=True)
                     px.start()                    
-                    px.join()
+                    px.join(timeout=10)
                 else:
                     pass
         
