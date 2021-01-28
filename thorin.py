@@ -89,13 +89,13 @@ with alive_bar(len(urls)) as bar:
     for i in urls:
         bar()
         i=i.rstrip()
-        p1 = Process(target=traceF, args=(i,),daemon=True)
+        p1 = Process(target=traceF, args=(i,))
         p1.start()
         
-        p2 = Process(target=credentialsFondF, args=(i,),daemon=True)
+        p2 = Process(target=credentialsFondF, args=(i,))
         p2.start()      
         
-        p4 = Process(target=base64F, args=(i,),daemon=True)
+        p4 = Process(target=base64F, args=(i,))
         p4.start()
 
         p2.join(timeout=5)
@@ -160,7 +160,7 @@ with alive_bar(len(urls)) as bar:
                 if dlink not in uniqlink :
                     uniqlink.append(dlink)
                     url=dlink
-                    px = Process(target=dirvulscanF, args=(url,),daemon=True)
+                    px = Process(target=dirvulscanF, args=(url,))
                     px.start()                    
                     px.join(timeout=10)
                 else:
