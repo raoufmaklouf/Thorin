@@ -23,7 +23,6 @@ def build_wordlist():
     return words
 
 def run(word_queue,url):
-    url=nano.inject_param(url,regex.payloads_OR_p)
     
     while not word_queue.empty():
         attempt = word_queue.get()
