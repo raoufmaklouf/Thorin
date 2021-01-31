@@ -32,8 +32,11 @@ def inject_dir1(link,pay):
 
 def inject_dir(link):
     inject_urls=[]
-    if link[-1] =="/":
-        link=link[:-1]
+    try:
+        if link[-1] =="/":
+            link=link[:-1]
+    except:
+        pass
     else:
         pass
     
