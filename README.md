@@ -17,6 +17,8 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 * Detect base64 in url 
 * Detect js files and and searching for data that might be sensitive, such as links or tokens or api keys 
 
+![alt text](https://github.com/raoufmaklouf/Thorin/blob/master/pictures/Screenshot%20at%202021-01-31%2015-04-16.png)
+
 ## Usage
 **Install:**
 
