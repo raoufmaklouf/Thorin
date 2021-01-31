@@ -241,25 +241,28 @@ def backupfile_(i):
     '.vb','.0','.1','.2','.arc','.inc','.lst',]
     urls=[]
     
-    subdomainmame=i.split('/')[2]
-    filename.append(subdomainmame)
-    subdomnameMod1=subdomainmame.replace('.','_')
-    filename.append(subdomnameMod1)
-    subdomnameMod2=subdomainmame.replace('.','-')
-    filename.append(subdomnameMod2)
-    subdomnameMod3=subdomainmame.replace('.','')
-    filename.append(subdomnameMod3)
-    domainname_=rev(subdomainmame).split('.')[0]+'.'+rev(subdomainmame).split('.')[1]
-    domainname=rev(domainname_)
-    filename.append(domainname)
-    domainnameMod1=domainname.replace('.','_')
-    filename.append(domainnameMod1)
-    domainnameMod2=domainname.replace('.','-')
-    filename.append(domainnameMod2)
-    domainnameMod3=domainname.replace('.','')
-    filename.append(domainnameMod3)
-    basename=domainname.split('.')[0]
-    filename.append(basename)
+    try:
+        subdomainmame=i.split('/')[2]
+        filename.append(subdomainmame)
+        subdomnameMod1=subdomainmame.replace('.','_')
+        filename.append(subdomnameMod1)
+        subdomnameMod2=subdomainmame.replace('.','-')
+        filename.append(subdomnameMod2)
+        subdomnameMod3=subdomainmame.replace('.','')
+        filename.append(subdomnameMod3)
+        domainname_=rev(subdomainmame).split('.')[0]+'.'+rev(subdomainmame).split('.')[1]
+        domainname=rev(domainname_)
+        filename.append(domainname)
+        domainnameMod1=domainname.replace('.','_')
+        filename.append(domainnameMod1)
+        domainnameMod2=domainname.replace('.','-')
+        filename.append(domainnameMod2)
+        domainnameMod3=domainname.replace('.','')
+        filename.append(domainnameMod3)
+        basename=domainname.split('.')[0]
+        filename.append(basename)
+    except:
+        pass
     for x in filename:
         for p in ext:
             link1=i+'/'+x+p
