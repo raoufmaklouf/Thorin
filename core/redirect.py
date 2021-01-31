@@ -32,10 +32,11 @@ def run(word_queue,url):
         for brute in attempt_list:
             user_agent=random.choice(regex.USR_AGENTS)
             headers = {'User-Agent': user_agent } 
-            url = url=nano.inject_param(url,str(brute))
+            
                         
                        
             try:
+                url = url=nano.inject_param(url,str(brute))
                 r = requests.get(url,headers=headers,verify=False)
                 h=r.history
        
