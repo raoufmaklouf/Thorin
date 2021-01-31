@@ -33,9 +33,16 @@ elif sys.argv[1] =='-d':
     urls= archiveurl.waybackurls(url)
      
     
+elif sys.argv[1] =='-r':
+    url=sys.argv[2]
+    urlslist.append(url)
+    urls=urlslist  
+    
 else:
     print('''usage: python3 thorin.py -f endpoint.txt
-       python3 thorin.py -d www.site.com      
+       python3 thorin.py -d www.site.com 
+       python3 thorin.py -r www.site.com/index.php?p=test
+            
     ''')
     sys.exit()
 
