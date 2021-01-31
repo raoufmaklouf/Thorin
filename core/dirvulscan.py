@@ -305,10 +305,7 @@ def backupfile_(i):
      
 
 def run(i):
-    try:
-       i=i.replace(':80','')
-    except:
-       pass
+    
     p1 = Process(target=lfi_, args=(i,))
     p1.start()
     p2 = Process(target=openredaraction_, args=(i,))
