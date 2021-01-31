@@ -59,36 +59,3 @@ def lfi_(url):
 
 
 
-def run_dir(word_queue,url):
-    
-    while not word_queue.empty():
-        attempt = word_queue.get()
-        attempt_list = []
-        attempt_list.append(attempt)
-
-       
-        for brute in attempt_list:  
-            try:
-                url = str(url).replace('uNiq_stRiNg',str(brute))
-                url=url.replace("b'","")
-                url=url.replace("'","")
-                r = requests.get(url,verify=False)
-                resp= r.content
-                if(re.search('root:', str(resp))):
-                   if(re.search('bin:', str(resp))):
-                        if(re.search('nobody:', str(resp))):
-                              if(re.search(':x:', str(resp))):
-                                   print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
-                                   break
-                                   
-                else:
-                    pass
-            except:
-                pass
-           
-word_queue = build_wordlist()
-def lfi_dir(url):
-    for i in range(threads):
-        t = threading.Thread(target=run_dir,args=(word_queue,url))
-        t.start()
-       
