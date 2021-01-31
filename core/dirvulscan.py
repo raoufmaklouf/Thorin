@@ -151,8 +151,8 @@ def openredaraction_(i):
                     bot.telegram_bot_sendtext(msg)                               
                                           
                             
-            except :
-                pass
+        except :
+            pass
         
 
 def lfi_(i):
