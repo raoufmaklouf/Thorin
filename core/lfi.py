@@ -32,20 +32,16 @@ def run(word_queue,url):
             user_agent=random.choice(regex.USR_AGENTS)
             headers={'User-Agent':user_agent }
             try:
-               url = nano.inject_param(url,str(brute))
-               url=url.replace("b'","")
-               url=url.replace("'","")
-               r = requests.get(url,headers=headers,verify=False)
-               resp= r.content
-               if(re.search('root:', str(resp))):
-                   if(re.search('bin:', str(resp))):
-                        if(re.search('nobody:', str(resp))):
-                              if(re.search(':x:', str(resp))):
-                                   print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
-                                   break
+                url = nano.inject_param(url,str(brute))               
+                r = requests.get(url,headers=headers,verify=False)
+                resp= r.content
+            
+                if(re.search('root:[x*]:0:0:', str(resp))): 
+                       print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
+                       break
  
-               else:
-                   pass
+                else:
+                    pass
             except:
                pass
            
