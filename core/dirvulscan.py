@@ -238,10 +238,15 @@ def backupfile_(i):
 
     filename=[]
     ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',  '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
-    '.vb','.0','.1','.2','.arc','.inc','.lst',]
+    '.vb','.0','.1','.2','.arc','.inc','.lst','.git/']
     urls=[]
     
     try:
+        protocol=i.split(":")[0]
+        baselink=i.split("/")[2]
+        baselink=protocol+'://'+baselink
+        #print(baselink)
+        #urls.append(baselink)
         subdomainmame=i.split('/')[2]
         filename.append(subdomainmame)
         subdomnameMod1=subdomainmame.replace('.','_')
@@ -292,10 +297,11 @@ def backupfile_(i):
                 try:
                      r = requests.head(brute,verify=False)
                      scode=r.status_code
-                     
-                     if '2' in str(scode) :
+                    
+
+                     if '2' or '3' in str(scode) :
                             if str(scode) != str(test_scode):
-                                print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+url)
+                                print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
                 except:
                     pass
                     
@@ -318,3 +324,6 @@ def run(i):
     p5.start()
     p6 = Process(target=backupfile_, args=(i,))
     p6.start()
+    
+    
+backupfile_("https://codemirror.net")
