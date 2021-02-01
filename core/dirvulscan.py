@@ -299,7 +299,7 @@ def backupfile_(i):
                      scode=r.status_code
                     
 
-                     if '2' or '3' in str(scode) :
+                     if str(scode)[0] == '2' or str(scode)[0] == '3' :
                             if str(scode) != str(test_scode):
                                 print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
                 except:
