@@ -32,6 +32,10 @@ def inject_dir1(link,pay):
 
 def inject_dir(link):
     inject_urls=[]
+    protocol=link.split(":")[0]
+    baselink=link.split("/")[2]
+    baselink=protocol+'://'+baselink
+    inject_urls.append(baselink)
     try:
         if link[-1] =="/":
             link=link[:-1]
