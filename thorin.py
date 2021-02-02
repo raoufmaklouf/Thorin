@@ -113,12 +113,15 @@ def credentialsFondF(i):
 static=[]
 with alive_bar(len(urls)) as bar:
     for i in urls:
-        bar()
         i=i.rstrip()
+        bar()
         if '?' in i:
-            chekUrl=i.split['?'][1]
+            chekUrl=i.split('?')[0]
+            
         else:
             chekUrl=i
+
+        print(chekUrl)
         for x in regex.STATIC_EXT:
             if chekUrl.endswith(x):
                 static.append(chekUrl)
@@ -158,7 +161,7 @@ with alive_bar(len(urls)) as bar:
                     url=plink
                     p6 = Process(target=xssF, args=(url,))
                     p6.start()                 
-                    #Not stable yet
+                 
                     #p7 = Process(target=open_redirectionF, args=(url,))
                     #p7.start() 
                  
