@@ -4,6 +4,7 @@ web application scanner
 * collects endpoints from web archive and scan it
 * scan text list of endpoints
 * scan one url
+
 **Vulnerability:** 
 * xss 
 * ssrf
