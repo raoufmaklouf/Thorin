@@ -22,7 +22,7 @@ def CredentialsFond_(url):
                if(mutch):               
                    mt=mutch.group()
                 
-                   print("\033[94m[+] Possibly credentials disclosure on: {} \033[00m".format(i))
+                   print("\033[94m[+] Possibly Sensitive data disclosure on: {} \033[00m".format(url))
                    print("\033[33m[{}]-----|\033[00m  {}".format(a.rstrip(),mt))
                                 
         else:
@@ -33,5 +33,4 @@ def CredentialsFond_(url):
                             
                                 
             
-
 
