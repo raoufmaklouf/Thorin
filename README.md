@@ -35,6 +35,9 @@ The tool collects endpoints from web archive and analyzes it and scan it from ma
 
 
  `python3 thorin.py -f endpointfile.txt`
+ 
+ 
+ `python3 thorin.py -r http://sub.domain.com/index.php?p=fuzz`
 
 
 
