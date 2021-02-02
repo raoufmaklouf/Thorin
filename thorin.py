@@ -121,7 +121,7 @@ with alive_bar(len(urls)) as bar:
         else:
             chekUrl=i
 
-        
+       
         for x in regex.STATIC_EXT:
             if chekUrl.endswith(x):
                 static.append(chekUrl)
@@ -149,8 +149,11 @@ with alive_bar(len(urls)) as bar:
                         uniqlink.append(dlink)
                         url=dlink
                         px = Process(target=dirvulscanF, args=(url,))
-                        px.start()                    
-                        px.join(timeout=10)
+                        px.start()   
+                        pz = Process(target=corsF, args=(url,))
+                        pz.start()                    
+                        px.join(timeout=10)                 
+                        pz.join(timeout=5)
                     else:
                         pass
                    
@@ -199,13 +202,10 @@ with alive_bar(len(urls)) as bar:
                         uniqlink.append(dlink)
                         url=dlink
                         px = Process(target=dirvulscanF, args=(url,))
-                        px.start()                    
+                        px.start() 
+                        pz = Process(target=corsF, args=(url,))
+                        pz.start()                    
                         px.join(timeout=10)
+                        pz.join(timeout=5)
                     else:
                         pass
-        
-        
-        
-         
-                    
-        
