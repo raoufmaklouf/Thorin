@@ -1,6 +1,9 @@
 # Thorin v2
-The tool collects endpoints from web archive and analyzes it and scan it from many vulnerabilities
+web application scanner
 ## Features 
+* collects endpoints from web archive and scan it
+* scan text list of endpoints
+* scan one url
 **Vulnerability:** 
 * xss 
 * ssrf
