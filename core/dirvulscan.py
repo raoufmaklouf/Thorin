@@ -325,5 +325,3 @@ def run(i):
     p6 = Process(target=backupfile_, args=(i,))
     p6.start()
     
-    
-backupfile_("https://codemirror.net")
