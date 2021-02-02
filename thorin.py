@@ -121,7 +121,7 @@ with alive_bar(len(urls)) as bar:
         else:
             chekUrl=i
 
-        print(chekUrl)
+        
         for x in regex.STATIC_EXT:
             if chekUrl.endswith(x):
                 static.append(chekUrl)
