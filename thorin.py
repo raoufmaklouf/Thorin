@@ -21,30 +21,48 @@ import sys
 
 
 urlslist=[]
-if sys.argv[1] =='-f':
-    file_=sys.argv[2]
-    f=open(file_,'r')
-    for x in f :
-        x=x.rstrip()
-        urlslist.append(x)
-    urls=urlslist
-elif sys.argv[1] =='-d':
-    url=sys.argv[2]
-    urls= archiveurl.waybackurls(url)
+try:
+    if sys.argv[1] =='-f':
+        file_=sys.argv[2]
+        f=open(file_,'r')
+        for x in f :
+            x=x.rstrip()
+            urlslist.append(x)
+        urls=urlslist
+    elif sys.argv[1] =='-d':
+        url=sys.argv[2]
+        urls= archiveurl.waybackurls(url)
      
     
-elif sys.argv[1] =='-r':
-    url=sys.argv[2]
-    urlslist.append(url)
-    urls=urlslist  
+    elif sys.argv[1] =='-r':
+        url=sys.argv[2]
+        urlslist.append(url)
+        urls=urlslist 
+    elif sys.argv[1] =='-h':
+        print('''usage: python3 thorin.py -f endpoint.txt
+       python3 thorin.py -d www.site.com 
+       python3 thorin.py -r http://sub.domain.com/index.php?p=fuzz
+            
+        ''')
+        sys.exit()
+        
     
-else:
+    else:
+        print('''usage: python3 thorin.py -f endpoint.txt
+           python3 thorin.py -d www.site.com 
+           python3 thorin.py -r http://sub.domain.com/index.php?p=fuzz
+            
+        ''')
+        sys.exit()
+        
+except:
     print('''usage: python3 thorin.py -f endpoint.txt
        python3 thorin.py -d www.site.com 
-       python3 thorin.py -r www.site.com/index.php?p=test
+       python3 thorin.py -r http://sub.domain.com/index.php?p=fuzz
             
-    ''')
+        ''')
     sys.exit()
+    
 
    
 
@@ -131,8 +149,8 @@ with alive_bar(len(urls)) as bar:
                  p6 = Process(target=xssF, args=(url,))
                  p6.start()                 
                  
-                 p7 = Process(target=open_redirectionF, args=(url,))
-                 p7.start() 
+                 #p7 = Process(target=open_redirectionF, args=(url,))
+                 #p7.start() 
                  
                  p8 = Process(target=sqlscanF, args=(url,))
                  p8.start()
@@ -158,7 +176,7 @@ with alive_bar(len(urls)) as bar:
                  p10.join(timeout=10)
                  p9.join(timeout=5)
                  p6.join(timeout=5)                
-                 p7.join(timeout=5)                 
+                 #p7.join(timeout=5)                 
                  p8.join(timeout=5)
             else:
                 pass
