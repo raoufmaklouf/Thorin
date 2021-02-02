@@ -158,7 +158,7 @@ with alive_bar(len(urls)) as bar:
                     url=plink
                     p6 = Process(target=xssF, args=(url,))
                     p6.start()                 
-                 
+                    #Not stable yet
                     #p7 = Process(target=open_redirectionF, args=(url,))
                     #p7.start() 
                  
