@@ -276,7 +276,7 @@ def backupfile_(i):
         link2=i+'/'+b
         urls.append(link2)
     try:
-        testlink=i+'/uniq_StriNg'
+        testlink=i+'/.uniq_Str.iNg'
         test_r = requests.head(testlink,verify=False)
         test_scode=test_r.status_code
     except:
