@@ -276,9 +276,15 @@ def backupfile_(i):
         link2=i+'/'+b
         urls.append(link2)
     try:
-        testlink=i+'/.uniq_Str.iNg'
-        test_r = requests.head(testlink,verify=False)
-        test_scode=test_r.status_code
+        testlink1=i+'/.uniq_Str'
+        test_r1 = requests.head(testlink,verify=False)
+        test_scode1=test_r.status_code
+        testlink2=i+'/uniq_Str.iNg'
+        test_r2 = requests.head(testlink,verify=False)
+        test_scode2=test_r.status_code
+        testlink3=i+'/uniq_Str.iNg'
+        test_r3 = requests.head(testlink,verify=False)
+        test_scode3=test_r.status_code
     except:
           pass
     
@@ -300,8 +306,10 @@ def backupfile_(i):
                     
 
                      if str(scode)[0] == '2' or str(scode)[0] == '3' :
-                            if str(scode) != str(test_scode):
-                                print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
+                            if str(scode) != str(test_scode1):
+                                if str(scode) != str(test_scode2):
+                                    if str(scode) != str(test_scode3):
+                                        print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
                 except:
                     pass
                     
@@ -324,4 +332,3 @@ def run(i):
     p5.start()
     p6 = Process(target=backupfile_, args=(i,))
     p6.start()
-    
