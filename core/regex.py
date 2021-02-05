@@ -150,23 +150,13 @@ REGEX_URL = {
 "htdocs":"/htdocs",
 "phpmyadmin":"/phpmyadmin" }
 
-payloads_OR_p=['//google.com/%2f..','///google.com/%2f..','////google.com/%2f..','https://google.com/%2f..','/https://google.com/%2f..','//www.google.com/%2f%2e%2e',
-'www.google.com','///www.google.com/%2f%2e%2e','////www.google.com/%2f%2e%2e','https://www.google.com/%2f%2e%2e','/https://www.google.com/%2f%2e%2e','//google.com/',
-'////google.com/','https://google.com/','/https://google.com/','//google.com//','//%09/google.com','///%09/google.com','////%09/google.com','/%5cgoogle.com',
-'//google%E3%80%82com','\/\/google.com/','/\/google.com/','//google%00.com','aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==','http:[::216.58.214.206]','google.com','ｰgoogle.com',
-'google.com','https://www.google.com','http://www.google.com'
+payloads_OR_p=['//omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f..','///omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f..','////omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f..','https://omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f..','/https://omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f..','//www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f%2e%2e',
+'www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','///www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f%2e%2e','////www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f%2e%2e','https://www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f%2e%2e','/https://www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/%2f%2e%2e','//omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/',
+'////omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/','https://omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/','/https://omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/','//omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net//','//%09/omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','///%09/omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','////%09/omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','/%5comeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net',
+'\/\/omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/','/\/omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net/','aHR0cDovL29tZWcwaXZuN2s5NXdsb3llemFoN3pjcWdobTdhdy5idXJwY29sbGFib3JhdG9yLm5ldA==','omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','ｰomeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net',
+'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','https://www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net','http://www.omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net'
 ]
-payloads_OR_d=['google.com/%2f..','https://google.com/%2f..','www.google.com/%2f%2e%2e',
-'www.google.com','www.google.com/%2f%2e%2e','https://www.google.com/%2f%2e%2e','google.com/',
-'https://google.com/','%09/google.com''/%5cgoogle.com',
-'google%E3%80%82com','google%00.com','aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==','http:[::216.58.214.206]','〱google.com','ｰgoogle.com',
-'google.com','http://www.google.com'
-]
-parameters_OR=[
-'dest','redirect','uri','path','continue','url','window','data','next','reference','site','html','val',
-'validate','domain','callback','return','page','view','dir','show','file','document','folder','root',
-'path','pg','style','pdf','template','php_path','doc','feed','host','port','to','out','navigation','open','result'
-] 
+
 XSS={'a<T"rSAF45>':'a%3CT%22rSAF45%3E','a<T"rSAF45':'a%3CT%22rSAF45','TrS"AF45<':'TrS%22AF45%3C','<TrSA"AF45':'<TrSA"AF45',
 'TrSAAFF"45<':'TrSAAFF"45<','TrSAA"F45<':'TrSAA%22F45%3C','TrSA"AF45>':'TrSA"AF45>','Tr"SA<F45':'Tr%22SA%3CF45',
 'TrSA>F"45':'TrSA%3EF%2245','TrSA<AF4"5':'TrSA<AF4"5','T"rSA>AF45':'T"rSA>AF45'}
