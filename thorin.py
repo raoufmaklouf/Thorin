@@ -165,8 +165,8 @@ with alive_bar(len(urls)) as bar:
                     p6 = Process(target=xssF, args=(url,))
                     p6.start()                 
                  
-                    #p7 = Process(target=open_redirectionF, args=(url,))
-                    #p7.start() 
+                    p7 = Process(target=open_redirectionF, args=(url,))
+                    p7.start() 
                  
                     p8 = Process(target=sqlscanF, args=(url,))
                     p8.start()
@@ -192,7 +192,7 @@ with alive_bar(len(urls)) as bar:
                     p10.join(timeout=10)
                     p9.join(timeout=5)
                     p6.join(timeout=5)                
-                    #p7.join(timeout=5)                 
+                    p7.join(timeout=5)                 
                     p8.join(timeout=5)
                 else:
                     pass
