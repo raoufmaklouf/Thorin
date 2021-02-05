@@ -38,13 +38,14 @@ def run(word_queue,url):
             try:
                 url = url=nano.inject_param(url,str(brute))
                 r = requests.get(url,headers=headers,verify=False)
-                h=r.history
-       
-                for red in h:
-                    nexturl=red.url
-                    x = re.findall('google', str(nexturl))
-                    if (x):
-                        print('\033[91m Possibly open redirection vulnerability\033[00m '+url)                                
+                cont=r.content
+                if 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont):
+                    if r.history :
+                        print('\033[91m Possibly open redirection vulnerability\033[00m '+url) 
+                       
+                    else:
+                        print('\033[91m Possibly SSRF vulnerability\033[00m '+url) 
+                                                  
                                           
                             
             except :
