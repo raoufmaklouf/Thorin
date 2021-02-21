@@ -242,10 +242,10 @@ def lfi_(i):
      
     
     
-        
+scodevar1=''       
 
 def backupfile_(i):
-
+    url=i
     filename=[]
     ext=['.tar','.rar','.zip','.tmp','.tar.gz','.sql.gz','.bak.sql','.bak.sql.gz', '.bak.sql.bz2','.bak.sql.tar.gz','.txt','.bak','.bak1','.bakup','.bakup1',  '.bkp','.save','.old','.orig','.original','.sql','.tpl','.tmp','.temp','.saved','.back','.bck','.bakup','.nsx','.cs','.csproj',
     '.vb','.0','.1','.2','.arc','.inc','.lst','.git/']
@@ -285,18 +285,7 @@ def backupfile_(i):
     for b in  ext:
         link2=i+'/'+b
         urls.append(link2)
-    try:
-        testlink1=i+'/.uniq_Str'
-        test_r1 = requests.head(testlink,verify=False)
-        test_scode1=test_r.status_code
-        testlink2=i+'/uniq_Str.iNg'
-        test_r2 = requests.head(testlink,verify=False)
-        test_scode2=test_r.status_code
-        testlink3=i+'/uniq_Str.iNg'
-        test_r3 = requests.head(testlink,verify=False)
-        test_scode3=test_r.status_code
-    except:
-          pass
+    
     
          
     
@@ -304,6 +293,12 @@ def backupfile_(i):
          
     word_queue = build_wordlist(urls)
     def expbf():
+          try:
+              testlink=url+'/.uniq_Str.zip'
+              test_r = requests.head(testlink,verify=False)
+              test_scode=test_r.status_code
+          except:
+              pass
           while not word_queue.empty():
             attempt = word_queue.get()
             attempt_list = []
@@ -316,10 +311,8 @@ def backupfile_(i):
                     
 
                      if str(scode)[0] == '2' or str(scode)[0] == '3' :
-                            if str(scode) != str(test_scode1):
-                                if str(scode) != str(test_scode2):
-                                    if str(scode) != str(test_scode3):
-                                        print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
+                            if str(scode) != str(test_scode):
+                                 print("\033[94m[+] Possibly backup file disclosure :\033[00m  "+brute)
                 except:
                     pass
                     
@@ -344,4 +337,3 @@ def run(i):
     p6.start()
     
     
-
