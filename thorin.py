@@ -12,6 +12,7 @@ from core import cors
 from core import ssrf
 from core import base_64
 from core import credentialsFond
+from core import HostHeaderAttacks # privet just for me
 from core import dirvulscan
 from core import regex
 from multiprocessing import Process
@@ -70,6 +71,9 @@ except:
 paramlink=[] 
 uniqlink=[]
 
+def HostHeaderAttacksF(i):
+    HostHeaderAttacks.hostheader_(i)
+
 def xssF(i):
     xss.xss_(i)
 
@@ -109,12 +113,28 @@ def dirvulscanF(i):
 def credentialsFondF(i):
     credentialsFond.CredentialsFond_(i)
 
- 
+rootdomain=[]
 static=[]
 with alive_bar(len(urls)) as bar:
     for i in urls:
         i=i.rstrip()
         bar()
+        # privet task
+       
+        protocol=i.split(":")[0]
+        baselink=i.split("/")[2]
+        rootdom=protocol+'://'+baselink
+        if rootdom not in rootdomain:
+            rootdomain.append(rootdom)
+            pxx = Process(target=HostHeaderAttacksF, args=(i,))
+            pxx.start()
+            pxx.join(timeout=7)
+        else:
+            pass
+
+        # privet task
+
+
         if '?' in i:
             chekUrl=i.split('?')[0]
             
