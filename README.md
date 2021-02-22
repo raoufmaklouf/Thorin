@@ -15,6 +15,7 @@ web application scanner
 * crlf 
 * os comman injection  
 * cross-origin resource sharing
+* host header attacks
 
 **Other features:**
 * Detect sensitive url like: .git or .svn folder/ Backup file like .back or .save or .old / token or api keys in url  like(slack,twilio,heroku,mailchamp,amazon,...)
