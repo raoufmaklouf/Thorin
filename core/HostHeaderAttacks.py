@@ -29,7 +29,7 @@ def task2(url):
         rs1=r1.status_code
         cont1 = r1.content
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in str(cont1):
-            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nhost header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response\n Host: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
+            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nhost header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
         elif 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont1):
             if r1.history:
                 print('\033[94mPossibly open redirection vulnerability with host header injection\033[00m  \n'+url+'\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
