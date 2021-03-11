@@ -12,7 +12,7 @@ from core import cors
 from core import ssrf
 from core import base_64
 from core import credentialsFond
-from core import HostHeaderAttacks # privet just for me
+from core import HostHeaderAttacks 
 from core import dirvulscan
 from core import regex
 from multiprocessing import Process
@@ -118,8 +118,9 @@ static=[]
 with alive_bar(len(urls)) as bar:
     for i in urls:
         i=i.rstrip()
+        i=i.replace(':80','')
         bar()
-        # privet task
+        
        
         protocol=i.split(":")[0]
         baselink=i.split("/")[2]
@@ -132,7 +133,7 @@ with alive_bar(len(urls)) as bar:
         else:
             pass
 
-        # privet task
+        
 
 
         if '?' in i:
