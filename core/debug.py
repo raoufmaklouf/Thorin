@@ -33,11 +33,10 @@ def debug_(i):
         url=i+x
         r = requests.get(url,verify=False)
         scode=r.status_code
-            if str(scode)[0] == '2' or str(scode)[0] == '3' :
-                if str(scode) != str(test_scode):
-                    print("\033[94m[+] Possibly debug disclosure :\033[00m  "+brute)
+        if str(scode)[0] == '2' or str(scode)[0] == '3' :
+             if str(scode) != str(test_scode):
+                 print("\033[94m[+] Possibly debug disclosure :\033[00m  "+brute)
           
-
 
 
 
