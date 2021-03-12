@@ -21,7 +21,7 @@ pay=[
 '/debug/',
 '/mysql_debug.sql',
 '/npm-debug.log',
-'/wp-content/debug.log
+'/wp-content/debug.log'
 ]
 
 def debug_(i):
