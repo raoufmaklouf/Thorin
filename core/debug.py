@@ -25,17 +25,20 @@ pay=[
 ]
 
 def debug_(i):
-    testlink=i+'/uniq_Str.log'
-    test_r = requests.get(testlink,verify=False)
-    test_scode=test_r.status_code
+     try:
+       testlink=i+'/uniq_Str.log'
+       test_r = requests.get(testlink,verify=False)
+       test_scode=test_r.status_code
          
-    for x in pay:
-        url=i+x
-        r = requests.get(url,verify=False)
-        scode=r.status_code
-        if str(scode)[0] == '2' or str(scode)[0] == '3' :
-             if str(scode) != str(test_scode):
-                 print("\033[94m[+] Possibly debug disclosure :\033[00m  "+brute)
+       for x in pay:
+           url=i+x
+           r = requests.get(url,verify=False)
+           scode=r.status_code
+           if str(scode)[0] == '2' or str(scode)[0] == '3' :
+                if str(scode) != str(test_scode):
+                    print("\033[94m[+] Possibly debug disclosure :\033[00m  "+brute)
+     except:
+        pass
           
 
 
