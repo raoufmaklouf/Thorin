@@ -15,6 +15,7 @@ from core import credentialsFond
 from core import HostHeaderAttacks 
 from core import dirvulscan
 from core import regex
+from core import debug
 from multiprocessing import Process
 from alive_progress import alive_bar
 import sys
@@ -113,27 +114,41 @@ def dirvulscanF(i):
 def credentialsFondF(i):
     credentialsFond.CredentialsFond_(i)
 
+def debugF(i):
+    debug.debug_(i)
+   
+
+
+    
 rootdomain=[]
 static=[]
 with alive_bar(len(urls)) as bar:
     for i in urls:
         i=i.rstrip()
-        i=i.replace(':80','')
+        i=i.replace(':80', '')
         bar()
         
        
         protocol=i.split(":")[0]
         baselink=i.split("/")[2]
         rootdom=protocol+'://'+baselink
+        
         if rootdom not in rootdomain:
             rootdomain.append(rootdom)
-            pxx = Process(target=HostHeaderAttacksF, args=(i,))
+            
+            pxx = Process(target=HostHeaderAttacksF, args=(rootdom,))
             pxx.start()
-            pxx.join(timeout=7)
+            pz = Process(target=corsF, args=(rootdom,))
+            pz.start() 
+            py=Process(target=debugF, args=(rootdom,))
+            py.start()   
+            pxx.join(timeout=5)
+            pz.join(timeout=5)
+            py.join(timeout=5)
         else:
             pass
 
-        
+       
 
 
         if '?' in i:
@@ -148,6 +163,7 @@ with alive_bar(len(urls)) as bar:
                 static.append(chekUrl)
 
         if chekUrl not in static:
+            
             p1 = Process(target=traceF, args=(i,))
             p1.start()
         
@@ -169,12 +185,11 @@ with alive_bar(len(urls)) as bar:
                     if dlink not in uniqlink :
                         uniqlink.append(dlink)
                         url=dlink
+                       
                         px = Process(target=dirvulscanF, args=(url,))
-                        px.start()   
-                        pz = Process(target=corsF, args=(url,))
-                        pz.start()                    
+                        px.start()                     
                         px.join(timeout=10)                 
-                        pz.join(timeout=5)
+                        
                     else:
                         pass
                    
@@ -183,6 +198,7 @@ with alive_bar(len(urls)) as bar:
                 if plink not in paramlink:
                     paramlink.append(plink)
                     url=plink
+                    
                     p6 = Process(target=xssF, args=(url,))
                     p6.start()                 
                  
@@ -224,9 +240,7 @@ with alive_bar(len(urls)) as bar:
                         url=dlink
                         px = Process(target=dirvulscanF, args=(url,))
                         px.start() 
-                        pz = Process(target=corsF, args=(url,))
-                        pz.start()                    
                         px.join(timeout=10)
-                        pz.join(timeout=5)
+                        
                     else:
                         pass
