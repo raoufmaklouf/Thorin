@@ -117,7 +117,7 @@ def crlf_(i):
         x=x.rstrip()
         url=i+'/'+x
         try:
-            r = requests.head(url,verify=False)
+            r = requests.get(url,verify=False)
             resp = r.content
             x = re.findall(regix, str(resp))
             if (x):
@@ -223,7 +223,7 @@ def lfi_(i):
                 url=str(ul)+str(brute) 
                 
                 try:
-                    r = requests.head(url,verify=False)
+                    r = requests.get(url,verify=False)
                     scode=r.status_code
                     resp = r.content
                    
