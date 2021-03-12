@@ -10,7 +10,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 threads =30
-
+rg1="root:[x*]:0:0:"
+rg2="\\[(font|extension|file)s\\]"
 def build_wordlist():
     
     words= queue.Queue()
@@ -35,10 +36,10 @@ def run(word_queue,url):
                 url = nano.inject_param(url,str(brute))               
                 r = requests.get(url,headers=headers,verify=False)
                 resp= r.content
-            
-                if(re.search('root:[x*]:0:0:', str(resp))): 
-                       print("\033[91mPossibly LFI vulnerability\033[00m  "+url)
-                       break
+                x1 = re.findall(rg1, str(resp))
+                x2 = re.findall(rg2, str(resp))
+                if (x1) or (x2):
+                       print('\033[91mPossibly LFI vulnerability\033[00m  '+url)
  
                 else:
                     pass
@@ -52,6 +53,5 @@ def lfi_(url):
          t = threading.Thread(target=run,args=(word_queue,url))
          t.start()
          
-
 
 
