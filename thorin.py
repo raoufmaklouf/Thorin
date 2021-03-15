@@ -16,7 +16,7 @@ from core import HostHeaderAttacks
 from core import dirvulscan
 from core import regex
 from core import debug
-from multiprocessing import Process
+import threading
 from alive_progress import alive_bar
 import sys
 
@@ -136,11 +136,11 @@ with alive_bar(len(urls)) as bar:
         if rootdom not in rootdomain:
             rootdomain.append(rootdom)
             
-            pxx = Process(target=HostHeaderAttacksF, args=(rootdom,))
+            pxx = threading.Thread(target=HostHeaderAttacksF, args=(rootdom,))
             pxx.start()
-            pz = Process(target=corsF, args=(rootdom,))
+            pz = threading.Thread(target=corsF, args=(rootdom,))
             pz.start() 
-            py=Process(target=debugF, args=(rootdom,))
+            py=threading.Thread(target=debugF, args=(rootdom,))
             py.start()   
             pxx.join(timeout=5)
             pz.join(timeout=5)
@@ -164,13 +164,13 @@ with alive_bar(len(urls)) as bar:
 
         if chekUrl not in static:
             
-            p1 = Process(target=traceF, args=(i,))
+            p1 = threading.Thread(target=traceF, args=(i,))
             p1.start()
         
-            p2 = Process(target=credentialsFondF, args=(i,))
+            p2 = threading.Thread(target=credentialsFondF, args=(i,))
             p2.start()      
         
-            p4 = Process(target=base64F, args=(i,))
+            p4 = threading.Thread(target=base64F, args=(i,))
             p4.start()
 
             p2.join(timeout=5)
@@ -186,7 +186,7 @@ with alive_bar(len(urls)) as bar:
                         uniqlink.append(dlink)
                         url=dlink
                        
-                        px = Process(target=dirvulscanF, args=(url,))
+                        px = threading.Thread(target=dirvulscanF, args=(url,))
                         px.start()                     
                         px.join(timeout=10)                 
                         
@@ -199,28 +199,28 @@ with alive_bar(len(urls)) as bar:
                     paramlink.append(plink)
                     url=plink
                     
-                    p6 = Process(target=xssF, args=(url,))
+                    p6 = threading.Thread(target=xssF, args=(url,))
                     p6.start()                 
                  
-                    p7 = Process(target=open_redirectionF, args=(url,))
+                    p7 = threading.Thread(target=open_redirectionF, args=(url,))
                     p7.start() 
                  
-                    p8 = Process(target=sqlscanF, args=(url,))
+                    p8 = threading.Thread(target=sqlscanF, args=(url,))
                     p8.start()
                  
-                    p9= Process(target=sstiscanF, args=(url,))
+                    p9= threading.Thread(target=sstiscanF, args=(url,))
                     p9.start()                 
                  
-                    p10 = Process(target=lfiscanF, args=(url,))
+                    p10 = threading.Thread(target=lfiscanF, args=(url,))
                     p10.start()                 
                  
-                    p11 = Process(target=crlfscanF, args=(url,))
+                    p11 = threading.Thread(target=crlfscanF, args=(url,))
                     p11.start()                 
                  
-                    p12 = Process(target=oscommandF, args=(url,))
+                    p12 = threading.Thread(target=oscommandF, args=(url,))
                     p12.start()                 
                  
-                    p13 = Process(target=ssrfF, args=(url,))
+                    p13 = threading.Thread(target=ssrfF, args=(url,))
                     p13.start()                 
                  
                     p13.join(timeout=5)
@@ -238,7 +238,7 @@ with alive_bar(len(urls)) as bar:
                     if dlink not in uniqlink :
                         uniqlink.append(dlink)
                         url=dlink
-                        px = Process(target=dirvulscanF, args=(url,))
+                        px = threading.Thread(target=dirvulscanF, args=(url,))
                         px.start() 
                         px.join(timeout=10)
                         
