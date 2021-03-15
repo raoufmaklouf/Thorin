@@ -2,7 +2,7 @@
 web application scanner
 ## Features 
 * collects endpoints from web archive and scan it
-* scan text list of endpoints
+* scan file list of endpoints
 * scan one url
 
 **Vulnerability:** 
