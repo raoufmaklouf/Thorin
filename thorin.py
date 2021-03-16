@@ -19,7 +19,9 @@ from core import debug
 import threading
 from alive_progress import alive_bar
 import sys
-
+from time import sleep
+import signal
+import os
 
 
 
@@ -244,3 +246,5 @@ with alive_bar(len(urls)) as bar:
                         
                     else:
                         pass
+sleep(60)                
+os.kill(os.getpid(), signal.SIGTERM)
