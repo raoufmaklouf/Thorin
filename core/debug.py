@@ -36,7 +36,7 @@ def debug_(i):
            scode=r.status_code
            if str(scode)[0] == '2' or str(scode)[0] == '3' :
                 if str(scode) != str(test_scode):
-                    print("\033[94m[+] Possibly debug disclosure :\033[00m  "+brute)
+                    print("\033[94m[+] Possibly debug page or file disclosure :\033[00m  "+url)
      except:
         pass
           
