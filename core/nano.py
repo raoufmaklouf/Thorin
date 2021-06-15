@@ -1,6 +1,28 @@
 import requests
 import re
 
+
+
+def isAlive(url):
+    try:
+        r = requests.get(url ,verify=False )
+        resp = r.status_code
+        if r :
+            if str(resp) != '404' :
+                return True
+            else:
+                return False
+        else:
+            return False
+    except:
+        pass
+
+
+
+
+
+
+
 def inject_dir1(link,pay):
     try:
        if link[-1] =="/":
