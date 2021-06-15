@@ -16,6 +16,7 @@ from core import HostHeaderAttacks
 from core import dirvulscan
 from core import regex
 from core import debug
+
 import threading
 from alive_progress import alive_bar
 import sys
@@ -127,124 +128,130 @@ static=[]
 with alive_bar(len(urls)) as bar:
     for i in urls:
         i=i.rstrip()
-        i=i.replace(':80', '')
+        
+        try:
+           i=i.replace(':80', '')
+        except:
+           pass
         bar()
         
-       
+        
         protocol=i.split(":")[0]
         baselink=i.split("/")[2]
         rootdom=protocol+'://'+baselink
         
         if rootdom not in rootdomain:
             rootdomain.append(rootdom)
-            
-            pxx = threading.Thread(target=HostHeaderAttacksF, args=(rootdom,))
-            pxx.start()
-            pz = threading.Thread(target=corsF, args=(rootdom,))
-            pz.start() 
-            py=threading.Thread(target=debugF, args=(rootdom,))
-            py.start()   
-            pxx.join(timeout=5)
-            pz.join(timeout=5)
-            py.join(timeout=5)
-        else:
-            pass
+            if nano.isAlive(rootdom) == True:
+                pxx = threading.Thread(target=HostHeaderAttacksF, args=(rootdom,))
+                pxx.start()
+                pz = threading.Thread(target=corsF, args=(rootdom,))
+                pz.start() 
+                py=threading.Thread(target=debugF, args=(rootdom,))
+                py.start()   
+                pxx.join(timeout=5)
+                pz.join(timeout=5)
+                py.join(timeout=5)
+            else:
+                pass
 
        
 
+        if nano.isAlive(i) == True:
 
-        if '?' in i:
-            chekUrl=i.split('?')[0]
+
+            if '?' in i:
+                chekUrl=i.split('?')[0]
             
-        else:
-            chekUrl=i
+            else:
+                chekUrl=i
 
        
-        for x in regex.STATIC_EXT:
-            if chekUrl.endswith(x):
-                static.append(chekUrl)
+            for x in regex.STATIC_EXT:
+                if chekUrl.endswith(x):
+                    static.append(chekUrl)
 
-        if chekUrl not in static:
+            if chekUrl not in static:
             
-            p1 = threading.Thread(target=traceF, args=(i,))
-            p1.start()
+                p1 = threading.Thread(target=traceF, args=(i,))
+                p1.start()
         
-            p2 = threading.Thread(target=credentialsFondF, args=(i,))
-            p2.start()      
+                p2 = threading.Thread(target=credentialsFondF, args=(i,))
+                p2.start()      
         
-            p4 = threading.Thread(target=base64F, args=(i,))
-            p4.start()
+                p4 = threading.Thread(target=base64F, args=(i,))
+                p4.start()
 
-            p2.join(timeout=5)
-            p1.join(timeout=5)
-            p4.join(timeout=5)
+                p2.join(timeout=5)
+                p1.join(timeout=5)
+                p4.join(timeout=5)
         
 
 
-            if "?" in i:
-                path=i.split('?')[0]
-                for dlink in nano.inject_dir(path):
-                    if dlink not in uniqlink :
-                        uniqlink.append(dlink)
-                        url=dlink
+                if "?" in i:
+                    path=i.split('?')[0]
+                    for dlink in nano.inject_dir(path):
+                        if dlink not in uniqlink :
+                            uniqlink.append(dlink)
+                            url=dlink
                        
-                        px = threading.Thread(target=dirvulscanF, args=(url,))
-                        px.start()                     
-                        px.join(timeout=10)                 
+                            px = threading.Thread(target=dirvulscanF, args=(url,))
+                            px.start()                     
+                            px.join(timeout=10)                 
                         
-                    else:
-                        pass
+                        else:
+                            pass
                    
 
-                plink=nano.inject_param(i,'yaTi8CP7Efh')
-                if plink not in paramlink:
-                    paramlink.append(plink)
-                    url=plink
+                    plink=nano.inject_param(i,'yaTi8CP7Efh')
+                    if plink not in paramlink:
+                        paramlink.append(plink)
+                        url=plink
                     
-                    p6 = threading.Thread(target=xssF, args=(url,))
-                    p6.start()                 
+                        p6 = threading.Thread(target=xssF, args=(url,))
+                        p6.start()                 
                  
-                    p7 = threading.Thread(target=open_redirectionF, args=(url,))
-                    p7.start() 
+                        p7 = threading.Thread(target=open_redirectionF, args=(url,))
+                        p7.start() 
                  
-                    p8 = threading.Thread(target=sqlscanF, args=(url,))
-                    p8.start()
+                        p8 = threading.Thread(target=sqlscanF, args=(url,))
+                        p8.start()
                  
-                    p9= threading.Thread(target=sstiscanF, args=(url,))
-                    p9.start()                 
+                        p9= threading.Thread(target=sstiscanF, args=(url,))
+                        p9.start()                 
                  
-                    p10 = threading.Thread(target=lfiscanF, args=(url,))
-                    p10.start()                 
+                        p10 = threading.Thread(target=lfiscanF, args=(url,))
+                        p10.start()                 
                  
-                    p11 = threading.Thread(target=crlfscanF, args=(url,))
-                    p11.start()                 
+                        p11 = threading.Thread(target=crlfscanF, args=(url,))
+                        p11.start()                 
                  
-                    p12 = threading.Thread(target=oscommandF, args=(url,))
-                    p12.start()                 
+                        p12 = threading.Thread(target=oscommandF, args=(url,))
+                        p12.start()                 
                  
-                    p13 = threading.Thread(target=ssrfF, args=(url,))
-                    p13.start()                 
+                        p13 = threading.Thread(target=ssrfF, args=(url,))
+                        p13.start()                 
                  
-                    p13.join(timeout=5)
-                    p12.join(timeout=5)
-                    p11.join(timeout=5)
-                    p10.join(timeout=10)
-                    p9.join(timeout=5)
-                    p6.join(timeout=5)                
-                    p7.join(timeout=5)                 
-                    p8.join(timeout=5)
-                else:
-                    pass
-            else:
-                for dlink in nano.inject_dir(i):
-                    if dlink not in uniqlink :
-                        uniqlink.append(dlink)
-                        url=dlink
-                        px = threading.Thread(target=dirvulscanF, args=(url,))
-                        px.start() 
-                        px.join(timeout=10)
-                        
+                        p13.join(timeout=5)
+                        p12.join(timeout=5)
+                        p11.join(timeout=5)
+                        p10.join(timeout=10)
+                        p9.join(timeout=5)
+                        p6.join(timeout=5)                
+                        p7.join(timeout=5)                 
+                        p8.join(timeout=5)
                     else:
                         pass
+                else:
+                    for dlink in nano.inject_dir(i):
+                        if dlink not in uniqlink :
+                            uniqlink.append(dlink)
+                            url=dlink
+                            px = threading.Thread(target=dirvulscanF, args=(url,))
+                            px.start() 
+                            px.join(timeout=10)
+                        
+                        else:
+                            pass
 sleep(60)                
 os.kill(os.getpid(), signal.SIGTERM)
