@@ -157,22 +157,22 @@ with alive_bar(len(urls)) as bar:
 
        
 
-        if nano.isAlive(i) == True:
+        
 
 
-            if '?' in i:
-                chekUrl=i.split('?')[0]
+        if '?' in i:
+            chekUrl=i.split('?')[0]
             
-            else:
-                chekUrl=i
+        else:
+            chekUrl=i
 
-       
-            for x in regex.STATIC_EXT:
-                if chekUrl.endswith(x):
-                    static.append(chekUrl)
-
-            if chekUrl not in static:
-            
+        
+        for x in regex.STATIC_EXT:
+            if chekUrl.endswith(x):
+                static.append(chekUrl)
+        
+        if chekUrl not in static:
+            if nano.isAlive(i) == True:
                 p1 = threading.Thread(target=traceF, args=(i,))
                 p1.start()
         
