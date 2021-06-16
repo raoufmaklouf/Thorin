@@ -1,8 +1,5 @@
 import requests
-import random
-import sys
-import threading
-import queue
+
 
 pay=[
 '//wp-content/debug.log',
