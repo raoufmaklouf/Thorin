@@ -186,3 +186,28 @@ def reflection(link):
             return False
     except:
         pass
+
+
+
+def inject_param_(link,pay):
+    prlst=[]
+    b_link=link.split('?')[0]
+    params=link.split('?')[1]
+    if '&' not in link:
+        paramkey=params.split('=')[1]
+        finelurl=link.replace(paramkey,pay)
+        prlst.append(finelurl)
+    else:
+        paramslist=params.split('&')
+        for p in paramslist:
+            paramkey=p.split('=')[1]
+            finelurl=link.replace(paramkey,pay)
+            prlst.append(finelurl)
+    return prlst
+
+
+
+
+
+   
+
