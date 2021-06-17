@@ -187,8 +187,8 @@ def reflection(link):
     except:
         pass
 
-
-
+    
+# for next update
 def inject_param_(link,pay):
     prlst=[]
     b_link=link.split('?')[0]
