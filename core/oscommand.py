@@ -35,15 +35,15 @@ def run(word_queue,url):
             user_agent=random.choice(regex.USR_AGENTS)
             headers = {'User-Agent': user_agent }   
             try:
-                url = nano.inject_param(url,str(brute))
-                r = requests.get(url,headers=headers ,verify=False )
-                cont = r.content
-                if "uid=" and "gid=" and "groups=" in str(cont):
-                    state=True
-                    print("\033[91mPossibly OS Command injection vulnerability\033[00m  "+url)
-                    break
-                else:
-                    pass
+                for link in nano.injecter(url,brute):
+                    r = requests.get(link,headers=headers ,verify=False ,timeout=13)
+                    cont = r.content
+                    if "uid=" and "gid=" and "groups=" in str(cont):
+                        state=True
+                        print("\033[91mPossibly OS Command injection vulnerability\033[00m  "+link)
+                        break
+                    else:
+                        pass
             except:
                pass
            
@@ -54,6 +54,7 @@ def oscommand_(url):
         for i in range(threads):
             t = threading.Thread(target=run,args=(word_queue,url))
             t.start()
+            t.join()
 
 
 
