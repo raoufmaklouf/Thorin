@@ -23,36 +23,41 @@ def build_wordlist():
     return words
 
 def run(word_queue,url):
-    
-    while not word_queue.empty():
+    stt=0
+    while not word_queue.empty() :
         attempt = word_queue.get()
         attempt_list = []
         attempt_list.append(attempt)
         
         for brute in attempt_list:
-            user_agent=random.choice(regex.USR_AGENTS)
-            headers = {'User-Agent': user_agent } 
+            if stt == 0:
+                user_agent=random.choice(regex.USR_AGENTS)
+                headers = {'User-Agent': user_agent } 
             
                         
                        
-            try:
-                url = url=nano.inject_param(url,str(brute))
-                r = requests.get(url,headers=headers,verify=False)
-                cont=r.content
-                if 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont):
-                    if r.history :
-                        print('\033[91m Possibly open redirection vulnerability\033[00m '+url) 
+                try:
+                    #url = url=nano.inject_param(url,str(brute))
+                    for link in nano.injecter(url,brute):
+                        r = requests.get(link,headers=headers,verify=False,timeout=13)
+                        cont=r.content
+                        if 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont):
+                            if r.history :
+                                print('\033[91m Possibly open redirection vulnerability\033[00m '+link)
+                                stt=1 
                        
-                    else:
-                        print('\033[91m Possibly SSRF vulnerability\033[00m '+url) 
+                            else:
+                                print('\033[91m Possibly SSRF vulnerability\033[00m '+link) 
+                                stt=1
                                                   
                                           
                             
-            except :
-                pass
+                except :
+                    pass
            
 word_queue = build_wordlist()
 def redirect_(url):
     for i in range(threads):
         t = threading.Thread(target=run,args=(word_queue,url))
         t.start()
+        t.join()
