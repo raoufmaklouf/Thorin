@@ -32,17 +32,17 @@ def run(word_queue,url):
         for brute in attempt_list:  
             user_agent=random.choice(regex.USR_AGENTS)
             headers={'User-Agent':user_agent }
-            try:
-                url = nano.inject_param(url,str(brute))               
-                r = requests.get(url,headers=headers,verify=False)
-                resp= r.content
-                x1 = re.findall(rg1, str(resp))
-                x2 = re.findall(rg2, str(resp))
-                if (x1) or (x2):
-                       print('\033[91mPossibly LFI vulnerability\033[00m  '+url)
+            try: 
+                for link in nano.injecter(url,brute):
+                    r = requests.get(link,headers=headers,verify=False,timeout=13)
+                    resp= r.content
+                    x1 = re.findall(rg1, str(resp))
+                    x2 = re.findall(rg2, str(resp))
+                    if (x1) or (x2):
+                       print('\033[91mPossibly LFI vulnerability\033[00m  '+link)
  
-                else:
-                    pass
+                    else:
+                        pass
             except:
                pass
            
@@ -52,6 +52,8 @@ def lfi_(url):
      for i in range(threads):
          t = threading.Thread(target=run,args=(word_queue,url))
          t.start()
+         t.join()
          
+
 
 
