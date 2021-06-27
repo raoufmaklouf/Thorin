@@ -193,7 +193,7 @@ with alive_bar(len(urls)) as bar:
                     for dlink in nano.inject_dir(path):
                         if dlink not in uniqlink :
                             uniqlink.append(dlink)
-                            url=dlink
+                            url=i
                        
                             px = threading.Thread(target=dirvulscanF, args=(url,))
                             px.start()                     
