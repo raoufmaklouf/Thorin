@@ -27,19 +27,21 @@ def run_(word_queue,url):
             attempt = word_queue.get()
             attempt_list = []
             attempt_list.append(attempt)
+            
         
             for brute in attempt_list:
-                try:
-                    session = requests.Session()
-                    url=nano.inject_param(url,brute)
-                    session.get(url)
-                    if 'crlf' in session.cookies.get_dict() and 'injection' in session.cookies.get_dict().values():
-                        print('\033[91m Possibly CRLF injection vulnerability\033[00m  '+url)
-                        break
-                    else :
+                for link in nano.injecter(url,brute):
+                    try:
+                        session = requests.Session()
+                        #url=nano.inject_param(url,brute)
+                        session.get(link,verify=False,timeout=13)
+                        if 'crlf' in session.cookies.get_dict() and 'injection' in session.cookies.get_dict().values():
+                            print('\033[91m Possibly CRLF injection vulnerability\033[00m  '+link)
+                            break
+                        else :
+                            pass
+                    except :
                         pass
-                except :
-                    pass
     else:
         pass
 
@@ -48,3 +50,7 @@ def crlf_(url):
         t = threading.Thread(target=run_,args=(word_queue,url))
         t.start()
         
+
+
+
+
