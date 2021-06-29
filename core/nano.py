@@ -1,11 +1,12 @@
 import requests
 import re
-
+from requests.packages import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
 
 def isAlive(url):
     try:
-        r = requests.get(url ,verify=False )
+        r = requests.get(url ,verify=False,timeout=10 )
         resp = r.status_code
         if r :
             if str(resp) != '404' :
@@ -187,22 +188,29 @@ def reflection(link):
     except:
         pass
 
-    
-# for next update
-def inject_param_(link,pay):
+
+
+def injecter(link,pay):
     prlst=[]
     b_link=link.split('?')[0]
     params=link.split('?')[1]
     if '&' not in link:
         paramkey=params.split('=')[1]
-        finelurl=link.replace(paramkey,pay)
+        finelurl=b_link+'?'+params.split('=')[0]+'='+pay
         prlst.append(finelurl)
     else:
         paramslist=params.split('&')
         for p in paramslist:
-            paramkey=p.split('=')[1]
-            finelurl=link.replace(paramkey,pay)
-            prlst.append(finelurl)
+            key=p.split('=')[0]
+            lurl=key+'='+pay+'&'
+            fin=b_link+'?'
+            for x in paramslist: 
+                if x.split('=')[0]==key:
+                    fin+=lurl
+                else:
+                    fin+=x+'&'    
+            fin=fin[:-1]    
+            prlst.append(fin)
     return prlst
 
 
