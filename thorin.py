@@ -25,8 +25,13 @@ import signal
 import os
 
 
-
+paramlink=[] 
+uniqlink=[]
+rootdomain=[]
+static=[]
 urlslist=[]
+
+
 try:
     if sys.argv[1] =='-f':
         file_=sys.argv[2]
@@ -72,8 +77,7 @@ except:
 
    
 
-paramlink=[] 
-uniqlink=[]
+
 
 def HostHeaderAttacksF(i):
     HostHeaderAttacks.hostheader_(i)
@@ -123,8 +127,7 @@ def debugF(i):
 
 
     
-rootdomain=[]
-static=[]
+
 with alive_bar(len(urls)) as bar:
     for i in urls:
         i=i.rstrip()
@@ -134,8 +137,8 @@ with alive_bar(len(urls)) as bar:
         except:
            pass
         bar()
-        
-        
+       
+
         protocol=i.split(":")[0]
         baselink=i.split("/")[2]
         rootdom=protocol+'://'+baselink
@@ -149,9 +152,9 @@ with alive_bar(len(urls)) as bar:
                 pz.start() 
                 py=threading.Thread(target=debugF, args=(rootdom,))
                 py.start()   
-                pxx.join(timeout=5)
-                pz.join(timeout=5)
-                py.join(timeout=5)
+                pxx.join()
+                pz.join()
+                py.join()
             else:
                 pass
 
@@ -182,22 +185,24 @@ with alive_bar(len(urls)) as bar:
                 p4 = threading.Thread(target=base64F, args=(i,))
                 p4.start()
 
-                p2.join(timeout=5)
-                p1.join(timeout=5)
-                p4.join(timeout=5)
+                p2.join()
+                p1.join()
+                p4.join()
         
 
 
                 if "?" in i:
+
                     path=i.split('?')[0]
                     for dlink in nano.inject_dir(path):
                         if dlink not in uniqlink :
                             uniqlink.append(dlink)
-                            url=i
+                            url=dlink
+                            
                        
                             px = threading.Thread(target=dirvulscanF, args=(url,))
                             px.start()                     
-                            px.join(timeout=10)                 
+                            px.join()                 
                         
                         else:
                             pass
@@ -206,40 +211,40 @@ with alive_bar(len(urls)) as bar:
                     plink=nano.inject_param(i,'yaTi8CP7Efh')
                     if plink not in paramlink:
                         paramlink.append(plink)
-                        url=plink
-                    
-                        p6 = threading.Thread(target=xssF, args=(url,))
+                        
+                       
+                        p6 = threading.Thread(target=xssF, args=(i,))
                         p6.start()                 
                  
-                        p7 = threading.Thread(target=open_redirectionF, args=(url,))
+                        p7 = threading.Thread(target=open_redirectionF, args=(i,))
                         p7.start() 
                  
-                        p8 = threading.Thread(target=sqlscanF, args=(url,))
+                        p8 = threading.Thread(target=sqlscanF, args=(i,))
                         p8.start()
                  
-                        p9= threading.Thread(target=sstiscanF, args=(url,))
+                        p9= threading.Thread(target=sstiscanF, args=(i,))
                         p9.start()                 
                  
-                        p10 = threading.Thread(target=lfiscanF, args=(url,))
+                        p10 = threading.Thread(target=lfiscanF, args=(i,))
                         p10.start()                 
                  
-                        p11 = threading.Thread(target=crlfscanF, args=(url,))
+                        p11 = threading.Thread(target=crlfscanF, args=(i,))
                         p11.start()                 
                  
-                        p12 = threading.Thread(target=oscommandF, args=(url,))
+                        p12 = threading.Thread(target=oscommandF, args=(i,))
                         p12.start()                 
                  
-                        p13 = threading.Thread(target=ssrfF, args=(url,))
+                        p13 = threading.Thread(target=ssrfF, args=(i,))
                         p13.start()                 
                  
-                        p13.join(timeout=5)
-                        p12.join(timeout=5)
-                        p11.join(timeout=5)
-                        p10.join(timeout=10)
-                        p9.join(timeout=5)
-                        p6.join(timeout=5)                
-                        p7.join(timeout=5)                 
-                        p8.join(timeout=5)
+                        p13.join()
+                        p12.join()
+                        p11.join()
+                        p10.join()
+                        p9.join()
+                        p6.join()                
+                        p7.join()                 
+                        p8.join()
                     else:
                         pass
                 else:
@@ -249,7 +254,7 @@ with alive_bar(len(urls)) as bar:
                             url=dlink
                             px = threading.Thread(target=dirvulscanF, args=(url,))
                             px.start() 
-                            px.join(timeout=10)
+                            px.join()
                         
                         else:
                             pass
