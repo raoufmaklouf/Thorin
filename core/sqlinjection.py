@@ -79,7 +79,7 @@ def semple(url):
     done=0
     user_agent=random.choice(regex.USR_AGENTS)
     headers = {'User-Agent': user_agent } 
-    payloads=["'","%27",'"',"%22",";","#","-","--","--+"]
+    payloads=["x'","x%27",'x"',"x%22","x;","x#","x-","x--","x--+"]
     
     for i in payloads: 
         if done ==1 :
