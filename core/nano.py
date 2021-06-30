@@ -195,12 +195,16 @@ def injecter(link,pay):
     b_link=link.split('?')[0]
     params=link.split('?')[1]
     if '&' not in link:
-        paramkey=params.split('=')[1]
-        finelurl=b_link+'?'+params.split('=')[0]+'='+pay
-        prlst.append(finelurl)
+        try:
+            paramkey=params.split('=')[1]
+            finelurl=b_link+'?'+params.split('=')[0]+'='+pay
+            prlst.append(finelurl)
+        except:
+            pass
     else:
         paramslist=params.split('&')
         for p in paramslist:
+            
             key=p.split('=')[0]
             lurl=key+'='+pay+'&'
             fin=b_link+'?'
