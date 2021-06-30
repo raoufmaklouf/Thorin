@@ -219,10 +219,13 @@ def injecterWithOrginKey(link,pay):
     b_link=link.split('?')[0]
     params=link.split('?')[1]
     if '&' not in link:
-        paramkey=params.split('=')[1]
+        try:
+            paramkey=params.split('=')[1]
         
-        finelurl=b_link+'?'+params.split('=')[0]+'='+paramkey+pay
-        prlst.append(finelurl)
+            finelurl=b_link+'?'+params.split('=')[0]+'='+paramkey+pay
+            prlst.append(finelurl)
+        except:
+            pass
     else:
         paramslist=params.split('&')
         for p in paramslist:
