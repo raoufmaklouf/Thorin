@@ -1,8 +1,8 @@
 import requests
 import re
 import random
-from core import nano
-from core import regex
+import nano
+import regex
 
 from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -12,7 +12,7 @@ def response_time(url):
     user_agent=random.choice(regex.USR_AGENTS)
     headers = {'User-Agent': user_agent } 
     try:
-        r = requests.get(url,headers=headers,verify=False,timeout=15)   
+        r = requests.get(url,headers=headers,verify=False)   
         r_time = int(r.elapsed.total_seconds())
         return r_time
     except:
@@ -51,26 +51,37 @@ def time_base(url):
         
     try:
         for x in regex.SQL_INJECTION_BLIND_BASE:
-            for link in nano.injecter(url,mt):
+            for link in nano.injecterWithOrginKey(url,mt):
+                
                 r1=link.replace(mt,str(x).format('3'))
+               
                 rs1=response_time(r1)
+                
                 r2=link.replace(mt,str(x).format('6'))
+               
                 rs2=response_time(r2)
+               
                 r3=link.replace(mt,str(x).format('9'))
+                
                 rs3=response_time(r3)
-                if int(rs1) >= 3 and int(rs2) >= 6 and int(rs3) >= 9:
-                    if int(rs1) >= int(rs2)/2 and int(rs1) >= int(rs3)/3:
-                          if int(rs2) >= int(rs1)*2 and int(rs3) >=int(rs1)*3:
-                               t=bolian_base(url)
-                               if t==True:
-                                   print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
-                                   break
+                
+              
+                if int(rs1) < int(rs2) and int(rs1) < int(rs3):
+                    if int(rs2) > int(rs1) and int(rs2) < int(rs3):
+                           if int(rs3) > int(rs1) and int(rs3) > int(rs2):
+                                rr=link.replace(mt,str(x).format('0'))
+                                rs=response_time(rr)
+                                if int(rs) < int(rs1)  and int(rs) <  int(rs2) and int(rs) < int(rs3):
+                                    t=bolian_base(url)
+                                    if t==True:
+                                        print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                                        break
                            
-                               else:
-                                   print('\033[33;1mWarning can be false positives\033[00m') 
-                                   print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                                   print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
-                               break
+                                    else:
+                                        print('\033[33;1mWarning can be false positives\033[00m') 
+                                        print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                                        print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                                    break
     except:
         pass
     
@@ -111,3 +122,4 @@ def sqlinjection_(url):
     task1=semple(url)
     if task1 == False:
         time_base(url)
+
