@@ -1,8 +1,8 @@
 import requests
 import re
 import random
-import nano
-import regex
+from core import nano
+from core import regex
 
 from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
