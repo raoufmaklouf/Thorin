@@ -30,8 +30,9 @@ def run_(word_queue,url):
             
         
             for brute in attempt_list:
-                for link in nano.injecter(url,brute):
-                    try:
+                
+                try:
+                    for link in nano.injecter(url,brute):
                         session = requests.Session()
                         #url=nano.inject_param(url,brute)
                         session.get(link,verify=False,timeout=13)
@@ -40,8 +41,8 @@ def run_(word_queue,url):
                             break
                         else :
                             pass
-                    except :
-                        pass
+                except :
+                    pass
     else:
         pass
 
