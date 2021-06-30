@@ -29,7 +29,7 @@ def task2(url):
         rs1=r1.status_code
         cont1 = r1.content
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in str(cont1):
-            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nhost header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
+            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nhost header value  reflection in response\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
         elif 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont1):
             if r1.history:
                 print('\033[94mPossibly open redirection vulnerability with host header injection\033[00m  \n'+url+'\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
@@ -47,7 +47,7 @@ def task2(url):
         rs2=r2.status_code
         cont2 = r2.content
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in str(cont2):
-            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nHost: '+str(base_domain)+'\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nhost header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response \n')
+            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nHost: '+str(base_domain)+'\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nhost header value  reflection in response \n')
         elif 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont2):
             if r2.history:
                 print('\033[94mPossibly open redirection vulnerability with host header injection\033[00m  \n'+url+'\nHost: '+base_domain+' \nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net \n')
@@ -65,7 +65,7 @@ def task2(url):
         rs3=r3.status_code
         cont3 = r3.content
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in str(cont3):
-            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nHost: '+str(base_domain)+':omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n host header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net" reflection in response\n')
+            print('\033[33minteresting host header handling !  \033[00m\n'+url+'\nHost: '+str(base_domain)+':omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n host header value  reflection in response\n')
         elif 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont3):
             if r3.history:
                 print('\033[94mPossibly open redirection vulnerability with host header injection\033[00m  \n'+url+'\nHost: '+str(base_domain)+':omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net \n')
@@ -112,10 +112,10 @@ def task3(url):
         data1 = res1.read().decode('utf-8')
         x1 = re.search('k6unx4pudf8k5itoapaxjwzjigz',data1)
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in data1 :
-            print('\033[33minteresting host header handling !  \033[00m\nhost header value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response\n '+url+'\nrequest {\nGET '+str(base_domain)+' HTTP/1.1\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n}\n')
+            print('\033[33minteresting host header handling !  \033[00m\nhost header value  reflection in response\n '+url+'\nGET '+str(base_domain)+' HTTP/1.1\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
             
         if (x1):
-            print('\033[91mPossibly SSRF vulnerability with host header injection\033[00m\n'+url+'request {\nGET '+str(url)+' HTTP/1.1\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n}\n')
+            print('\033[91mPossibly SSRF vulnerability with host header injection\033[00m\n'+url+'\nGET '+str(url)+' HTTP/1.1\nHost: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
             
         else:
             pass
@@ -127,7 +127,7 @@ def task3(url):
     
         x2 = re.search('k6unx4pudf8k5itoapaxjwzjigz',data2)
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in data2 :
-            print('\033[33minteresting host header handling !  \033[00m\nvalue "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net" reflection in response\n'+url+'\nrequest {\nGET '+str(prot)+'//omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net HTTP/1.1\nHost: '+str(base_domain)+'\n}\n')
+            print('\033[33minteresting host header handling !  \033[00m\nhost header value  reflection in response\n'+url+'\nrequest {\nGET '+str(prot)+'//omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net HTTP/1.1\nHost: '+str(base_domain)+'\n}\n')
         if (x2):
             print(url+'\n\033[91mPossibly SSRF vulnerability with host header injection\033[00m\n'+'request {\nGET http://omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net HTTP/1.1\nHost: '+str(base_domain)+'\n}\n')
             
@@ -160,7 +160,7 @@ def task4(url):
         rs1=r1.status_code
         cont1 = r1.content
         if 'omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net' in str(cont1):
-            print('\033[33minteresting  header handling !  \033[00m\n'+url+'\nheader value "omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net"  reflection in response\n'+'Host '+str(base_domain)+'\nX-Forwarded-Host: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-Host: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-Forwarded-Server: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-HTTP-Host-Override: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nForwarded: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
+            print('\033[33minteresting  header handling !  \033[00m\n'+url+'\nheader value  reflection in response\n'+'Host '+str(base_domain)+'\nX-Forwarded-Host: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-Host: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-Forwarded-Server: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nX-HTTP-Host-Override: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\nForwarded: omeg0ivn7k95wloyezah7zcqghm7aw.burpcollaborator.net\n')
            
         elif 'k6unx4pudf8k5itoapaxjwzjigz' in str(cont1):
             if r1.history:
@@ -173,7 +173,6 @@ def task4(url):
             pass
     except:
         pass
-
 def hostheader_(url):
     
     t2 = threading.Thread(target=task2,args=(url,))
@@ -184,9 +183,9 @@ def hostheader_(url):
     t3.start()
     t4.start()
     
-    t2.join(timeout=5)
-    t3.join(timeout=5)
-    t4.join(timeout=5)
+    t2.join(timeout=1.5)
+    t3.join(timeout=1.5)
+    t4.join(timeout=1.5)
 
 
 
