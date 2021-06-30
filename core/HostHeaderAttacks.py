@@ -183,9 +183,9 @@ def hostheader_(url):
     t3.start()
     t4.start()
     
-    t2.join(timeout=1.5)
-    t3.join(timeout=1.5)
-    t4.join(timeout=1.5)
+    t2.join(timeout=4)
+    t3.join(timeout=4)
+    t4.join(timeout=4)
 
 
 
