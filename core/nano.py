@@ -214,7 +214,31 @@ def injecter(link,pay):
     return prlst
 
 
-
+def injecterWithOrginKey(link,pay):
+    prlst=[]
+    b_link=link.split('?')[0]
+    params=link.split('?')[1]
+    if '&' not in link:
+        paramkey=params.split('=')[1]
+        
+        finelurl=b_link+'?'+params.split('=')[0]+'='+paramkey+pay
+        prlst.append(finelurl)
+    else:
+        paramslist=params.split('&')
+        for p in paramslist:
+            key=p.split('=')[0]
+            vul=p.split('=')[1]
+           
+            lurl=key+'='+vul+pay+'&'
+            fin=b_link+'?'
+            for x in paramslist: 
+                if x.split('=')[0]==key:
+                    fin+=lurl
+                else:
+                    fin+=x+'&'    
+            fin=fin[:-1]    
+            prlst.append(fin)
+    return prlst
 
 
    
