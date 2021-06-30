@@ -11,7 +11,7 @@ mt='InKgg67\[2s4h7jT67HF5)o[>,j'
 def xss_(link):
     
     if nano.reflection(link) == True:
-        for url in nano.injecter(link,mt):
+        for url in nano.injecterWithOrginKey(link,mt):
             for rg,p in regex.XSS.items():
                 user_agent=random.choice(regex.USR_AGENTS)
                 headers = {'User-Agent': user_agent } 
