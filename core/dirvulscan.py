@@ -380,7 +380,7 @@ def run(i):
     p4.start()
     p5 = Process(target=xss_, args=(i,))
     p5.start()
-    p6 = Process(target=backupfile_, args=(i,))
-    p6.start()
+    #p6 = Process(target=backupfile_, args=(i,)) #need more work
+    #p6.start()
     
     
