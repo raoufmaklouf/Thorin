@@ -1,4 +1,7 @@
 # Thorin v2
+![alt text](https://github.com/raoufmaklouf/Thorin/blob/master/pictures/thorin.png)
+
+
 web application scanner
 ## Features 
 * collects endpoints from web archive and scan it
