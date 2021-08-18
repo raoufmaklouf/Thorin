@@ -1,8 +1,16 @@
-# Thorin V2
-![alt text](https://github.com/raoufmaklouf/Thorin/blob/master/pictures/thorin2.png)
-# web application scanner
+<h1 align="center">
+Thorin
+</h1>
 
-## Features 
+![alt text](https://github.com/raoufmaklouf/Thorin/blob/master/pictures/thorin2.png)
+
+💬 description
+-----
+web application scanner Focuses on checking inputs and misconfiguration
+
+💪 Features
+-----
+
 * collects endpoints from web archive and scan it
 * scan file list of endpoints
 * scan one url
