@@ -27,7 +27,7 @@ def trace_(url):
                     r="\033[35m[{}]\033[00m".format(str(scode))
                 else:
                     r=scode
-                print("\033[94m[INFO]\033[00m\033[33m[{}]\033[00m{}  {}".format(a.rstrip(),r,nano.search_color(str(mutch_),url)))
+                print("\033[94m[INFO]\033[00m\033[33m[{}]\033[00m{}  {} {}".format(a.rstrip(),r,nano.search_color(str(mutch_),url)))
             except:
                 pass
         else:
