@@ -168,26 +168,26 @@ def sqlinjection(url):
     "%20WAITFOR DELAY '0:0:{}'",
     ]
 
-    try:
-        r1=requests.get(url+'test',verify=False,timeout=13).text
-        r2=requests.get(url+'test',verify=False,timeout=13).text
-        if len(r1)==len(r2) :
-            for god,bad in SQL_INJECTION_ERROR_BASE.items():
+    #try:
+       # r1=requests.get(url+'test',verify=False,timeout=13).text
+       # r2=requests.get(url+'test',verify=False,timeout=13).text
+       # if len(r1)==len(r2) :
+         #   for god,bad in SQL_INJECTION_ERROR_BASE.items():
                 
-                r1=requests.get(url+god,verify=False,timeout=13)
-                god_r=r1.content
-                sr1=r1.status_code
-                r2=requests.get(url+bad,verify=False,timeout=13)
-                bad_r=r2.content
-                sr2=r2.status_code
-                if len(god_r) != len(bad_r) or sr1 != sr2:
+           #     r1=requests.get(url+god,verify=False,timeout=13)
+           #     god_r=r1.content
+            #    sr1=r1.status_code
+           #     r2=requests.get(url+bad,verify=False,timeout=13)
+           #     bad_r=r2.content
+            #    sr2=r2.status_code
+             #  if len(god_r) != len(bad_r) or sr1 != sr2:
                     
-                    print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
-                    print(url+god+' | response Length:'+str(len(god_r))+'  status code: '+str(sr1)+'\n'+url+bad+' | response Length:'+str(len(bad_r))+'  status code: '+str(sr1))
+              #      print("\033[91mPossibly SQL injection vulnerability\033[00m  ")
+               #     print(url+god+' | response Length:'+str(len(god_r))+'  status code: '+str(sr1)+'\n'+url+bad+' | response Length:'+str(len(bad_r))+'  status code: '+str(sr1))
                         
                     
-    except:
-        pass
+   # except:
+    #    pass
 
 
     try:
