@@ -215,7 +215,7 @@ def sqlinjection(url):
                                 if int(rs) < int(rs1)  and int(rs) <  int(rs2) and int(rs) < int(rs3):
                                     
                                     
-                                    print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
+                                    print("\033[91mPossibly SQL injection vulnerability\033[00m  \n"+r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
                                     break
                            
                                
