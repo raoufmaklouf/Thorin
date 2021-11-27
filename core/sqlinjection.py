@@ -71,7 +71,7 @@ def time_base(url):
                            if int(rs3) > int(rs1) and int(rs3) > int(rs2):
                                 rr=link.replace(mt,str(x).format('0'))
                                 rs=response_time(rr)
-                                if int(rs) < int(rs1)  and int(rs) <  int(rs2) and int(rs) < int(rs3):
+                                if int(rs) < int(rs1)  and int(rs) <  int(rs2) and int(rs) < int(rs3) and int(rs1) >= 3 and  int(rs1) >=6 and int(rs1) >=9:
                                     t=bolian_base(url)
                                     if t==True:
                                         print(r1+' | Response time:'+'\033[32m'+str(rs1)+'\033[00m'+'\n'+r2+' | Response time:'+'\033[32m'+str(rs2)+'\033[00m'+'\n'+r3+' | Response time:'+'\033[32m'+str(rs3)+'\033[00m')
