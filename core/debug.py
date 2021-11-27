@@ -1,5 +1,5 @@
 import requests
-
+from core import nano
 
 pay=[
 '//wp-content/debug.log',
@@ -23,20 +23,19 @@ pay=[
 
 def debug_(i):
      try:
-       testlink=i+'/uniq_Str.log'
-       test_r = requests.get(testlink,verify=False)
-       test_scode=test_r.status_code
+       
          
        for x in pay:
            url=i+x
            r = requests.get(url,verify=False)
            scode=r.status_code
            if str(scode)[0] == '2' or str(scode)[0] == '3' :
+                r2=requests.get(url+nano.random_char(3),verify=False)
+                test_scode=r2.status_code
                 if str(scode) != str(test_scode):
                     print("\033[94m[+] Possibly debug page or file disclosure :\033[00m  "+url)
      except:
         pass
           
-
 
 
