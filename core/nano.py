@@ -1,7 +1,19 @@
 import requests
 import re
+import random
+import string
 from requests.packages import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
+
+
+def random_char(n):
+       return ''.join(random.choice(string.ascii_letters) for x in range(n))
+       
+def random_number():
+       return ''.join(random.choice('123456789') for x in range(random.randint(1, 5)))
+
+
+
 
 
 def isAlive(url):
@@ -249,4 +261,3 @@ def injecterWithOrginKey(link,pay):
 
 
    
-
