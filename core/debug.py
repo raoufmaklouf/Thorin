@@ -22,7 +22,7 @@ pay=[
 ]
 
 def debug_(i):
-     try:
+    try:
        
          
        for x in pay:
@@ -35,7 +35,7 @@ def debug_(i):
                 test_scode=r2.status_code
                 if str(scode) != str(test_scode):
                     print("\033[94m[+] Possibly debug page or file disclosure :\033[00m\n"+url+" scode:"+str(scode)+"length:"+len(resp)
-     except:
+    except:
         pass
           
 
