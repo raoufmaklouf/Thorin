@@ -34,7 +34,7 @@ def debug_(i):
                 r2=requests.get(url+nano.random_char(3),verify=False)
                 test_scode=r2.status_code
                 if str(scode) != str(test_scode):
-                    print("\033[94m[+] Possibly debug page or file disclosure :\033[00m\n"+url+" scode:"+str(scode)+"length:"+len(resp)
+                    print("\033[94m[+] Possibly debug page or file disclosure :\033[00m\n"+url+" scode:"+str(scode)+"length:"+len(resp))
     except:
         pass
           
