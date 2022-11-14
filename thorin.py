@@ -16,7 +16,6 @@ from core import HostHeaderAttacks
 from core import dirvulscan
 from core import regex
 from core import debug
-from core import cacheLv3
 import threading
 from alive_progress import alive_bar
 import sys
@@ -124,8 +123,6 @@ def credentialsFondF(i):
 def debugF(i):
     debug.debug_(i)
    
-def cache(i):
-    cacheLv3.run(i)
 
     
 
@@ -151,8 +148,6 @@ with alive_bar(len(urls)) as bar:
                 pxx.start()
                 pz = threading.Thread(target=corsF, args=(rootdom,))
                 pz.start()
-                pxxx= threading.Thread(target=cache, args=(rootdom,))
-                pxxx.start()
                 py=threading.Thread(target=debugF, args=(rootdom,))
                 py.start()   
                 pxx.join()
@@ -182,8 +177,7 @@ with alive_bar(len(urls)) as bar:
             if nano.isAlive(i) == True:
                 p1 = threading.Thread(target=traceF, args=(i,))
                 p1.start()
-                pxxx=threading.Thread(target=cache, args=(i,))
-                pxxx.start()
+               
                 p2 = threading.Thread(target=credentialsFondF, args=(i,))
                 p2.start()      
         
