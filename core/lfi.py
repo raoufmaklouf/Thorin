@@ -21,7 +21,7 @@ def build_wordlist():
         
     return words
 
-def run(word_queue,url):
+def run(word_queue):
     
     while not word_queue.empty():
         attempt = word_queue.get()
