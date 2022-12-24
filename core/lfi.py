@@ -50,7 +50,7 @@ def run(word_queue,url):
 word_queue = build_wordlist()
 def lfi_(url):
      for i in range(threads):
-         t = threading.Thread(target=run,args=(word_queue,url))
+         t = threading.Thread(target=run,args=(word_queue,))
          t.start()
          t.join()
          
