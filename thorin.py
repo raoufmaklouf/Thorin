@@ -151,7 +151,7 @@ with alive_bar(len(urls)) as bar:
                 py=threading.Thread(target=debugF, args=(rootdom,))
                 py.start()   
                 pxx.join()
-                pxxx.join()
+                pxx.join()
                 pz.join()
                 py.join()
             else:
@@ -187,7 +187,7 @@ with alive_bar(len(urls)) as bar:
                 p2.join()
                 p1.join()
                 p4.join()
-                pxxx.join()
+                pxx.join()
         
 
 
